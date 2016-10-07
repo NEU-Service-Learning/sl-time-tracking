@@ -1,3 +1,5 @@
+![](https://travis-ci.org/deadlocked247/sl-time-tracking.svg?branch=master)
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
