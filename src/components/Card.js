@@ -1,28 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 class Card extends Component {
 	static propTypes = {
-		title: PropTypes.string,
-		subtitle: PropTypes.string,
+		content: PropTypes.arrayOf(PropTypes.shape({ onClick: PropTypes.func, icon: PropTypes.string, text: PropTypes.string })),
 		description: PropTypes.string,
-		content: PropTypes.arrayOf(PropTypes.shape({ link: PropTypes.string, icon: PropTypes.string, text: PropTypes.string })),
+		onClick: PropTypes.func,
+		subtitle: PropTypes.string,
+		title: PropTypes.string,
 	}
 
 	static defaultProps = {
-		title: "Kristy",
-		subtitle: "Joined in 2013",
-		description: "Kristy is an art director living in New York.",
 		content: [{
 			icon: "user icon",
+			onClick: () => {},
 			text: "22 friends",
-			link: "#",
 		}],
+		description: "Kristy is an art director living in New York.",
+		onClick: () => {},
+		subtitle: "Joined in 2013",
+		title: "Kristy",
 	}
 
 	render () {
-		const { title, subtitle, description, content } = this.props
+		const { title, subtitle, description, content, onClick } = this.props
 		return (
-			<div className="ui card">
+			<div onClick={onClick} className="ui card">
 			  <div className="image">
 			    <img alt="Card" src="http://semantic-ui.com/images/avatar2/large/kristy.png" />
 			  </div>
@@ -37,7 +39,7 @@ class Card extends Component {
 			  </div>
 			  <div className="extra content">
 					{content.map(item => (
-						<a href={item.link}>
+						<a onClick={item.onClick} key={item.text}>
 				      <i className={item.icon}></i>
 				    	{item.text}
 				    </a>
