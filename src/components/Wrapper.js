@@ -1,34 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
+import Button from './Button'
+import Sidebar from './Sidebar'
 
 class Wrapper extends Component {
+  static MenuItems = [
+    {
+      label: 'Time Tracker',
+      icon: 'hourglass half icon',
+      onClick: () => {},
+      active: true,
+    },
+    {
+      label: 'Settings',
+      icon: 'setting icon',
+      onClick: () => {},
+      active: false,
+    },
+    {
+      label: 'Help',
+      icon: 'life ring icon',
+      onClick: () => {},
+      active: false,
+    }
+  ]
+
 	renderNavbar() {
 		return (
 			<div style={{ padding: '2rem 0' }} className="ui container">
 				<div className="ui secondary menu">
-				  <div className="active item">Link</div>
-				  <a className="item">Link</a>
-				  <div className="ui dropdown item" tabindex="0">
-				    Dropdown
-				    <i className="dropdown icon"></i>
-				    <div className="menu" tabindex="-1">
-				      <div className="item">Action</div>
-				      <div className="item">Another Action</div>
-				      <div className="item">Something else here</div>
-				      <div className="divider"></div>
-				      <div className="item">Separated Link</div>
-				      <div className="divider"></div>
-				      <div className="item">One more separated link</div>
-				    </div>
+          <div className="left menu">
+            <h2 style={{ fontWeight: 300, alignSelf: 'center'}}>Service Learning</h2>
 				  </div>
 				  <div className="right menu">
-				    <div className="item">
-				      <div className="ui action left icon input">
-				        <i className="search icon"></i>
-				        <input type="text" placeholder="Search" />
-				        <button className="ui button">Submit</button>
-				      </div>
-				    </div>
-				    <a className="item">Link</a>
+		        <Button>
+              Login
+            </Button>
 				  </div>
 				</div>
 			</div>
@@ -37,9 +44,11 @@ class Wrapper extends Component {
 
 	render () {
 		const { children } = this.props
+    const { MenuItems } = Wrapper
 		return (
 			<div>
 				{this.renderNavbar()}
+        <Sidebar items={MenuItems}/>
 				{children}
 			</div>
 		)
