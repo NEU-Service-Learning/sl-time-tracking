@@ -1,0 +1,14 @@
+.backdrop::before {
+  position: relative;
+  top: 0;
+  left: 0;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.backdrop {
+  z-index: 999999999;
+  position: relative;
+}
