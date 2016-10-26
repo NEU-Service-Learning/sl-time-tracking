@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router';
 
 import Button from './Button'
 import Sidebar from './Sidebar'
@@ -33,9 +34,9 @@ class Wrapper extends Component {
             <h2 style={{ fontWeight: 300, alignSelf: 'center'}}>Service Learning</h2>
 				  </div>
 				  <div className="right menu">
-		        <Button>
-              Login
-            </Button>
+            <Link to="/login">
+              <Button>Click to login</Button>
+            </Link>
 				  </div>
 				</div>
 			</div>
