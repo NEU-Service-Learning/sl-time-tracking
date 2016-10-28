@@ -46,7 +46,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "eslint-plugin-flowtype": "^2.25.0",
+    "eslint-plugin-flowtype": "2.18.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "lodash": "^4.16.4",
