@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import Home from './pages/Home'
+import Home from './pages/Home/Home'
 import Wrapper from './components/Wrapper'
 import configureStore from './redux/store'
 

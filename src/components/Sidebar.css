@@ -1,0 +1,54 @@
+.app-sidebar {
+  padding: 1rem;
+  position: fixed;
+  left: 0;
+  top: 50px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.app-sidebar>a, .app-sidebar-avatar {
+  margin: 2rem 3rem;
+  color: #4f5083;
+  font-size: 20px;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.app-logout {
+  bottom: calc(50px - 1rem);
+  position: fixed;
+}
+
+.app-sidebar>a:hover {
+  opacity: 1;
+}
+
+.app-sidebar-avatar>img {
+  border-radius: 50%;
+  height: 50px;
+  overflow: hidden;
+  width: 50px;
+}
+
+.app-sidebar-avatar {
+  opacity: 1;
+  margin-bottom: 2rem;
+}
+
+.app-sidebar>.active.item {
+  opacity: 1;
+}
+.app-sidebar>.active.item:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  background-color: #8053b8;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -2rem;
+  margin-top: 5px;
+}

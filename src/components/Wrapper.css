@@ -1,0 +1,20 @@
+.nav-icon {
+  align-self: center;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.nav-purple {
+  background-color: #5d477e;
+  position: relative;
+}
+
+.nav-open {
+  left: 300px;
+  top: 50px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: -100px 50px 200px 0 rgba(0, 0, 0, .15);
+}
