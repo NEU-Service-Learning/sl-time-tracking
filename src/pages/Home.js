@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 import Content from '../components/Content'
 import Items from '../components/Items'
 import Map from '../components/Map'
+import Button from '../components/Button'
+import Modal from '../components/Modal'
+import StudentForm from '../components/StudentForm'
 
 class Home extends Component {
   constructor(props) {
@@ -12,6 +15,7 @@ class Home extends Component {
         lat: 42.33902090000001,
         lng: -71.0878994,
       },
+      isModalVisble: false,
     }
   }
   renderFeed() {
@@ -77,20 +81,20 @@ class Home extends Component {
     const { location } = this.state
 		return (
 			<div className="ui container">
+        <Modal isVisible={this.state.isModalVisble} approveOnClick={() => {this.setState({isModalVisble: false})}} cancelOnClick={() => {this.setState({isModalVisble: false})}} header='Enter Hours'>
+          <StudentForm></StudentForm>
+        </Modal>
 				<div className="ui three column stackable grid">
           <div className="sixteen wide column">
-            <Map style={{ height: '400px', borderRadius: '5px' }} defaultCenter={location} />
+          <Button className='ui button fluid' onClick={() => {this.setState({isModalVisble: true})}}>
+            <i className="add to calendar icon"/>
+            Enter Hours
+          </Button>
+          <Button className='ui button fluid'>
+            <i className="calendar icon"/>
+            View Hours
+          </Button>
           </div>
-          <div className="twelve wide column">
-            <Items>
-              {this.renderItem()}
-            </Items>
-          </div>
-					<div className="four wide column">
-            <Content>
-              {this.renderFeed()}
-            </Content>
-					</div>
 				</div>
 			</div>
 		)
