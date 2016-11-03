@@ -4,7 +4,11 @@ import { connect } from 'react-redux'
 import Button from './Button'
 import Sidebar from './Sidebar'
 import MenuIcon from '../img/menu.svg'
+import MenuIconAlt from '../img/menu-alt.svg'
+
 import MenuCloseIcon from '../img/menu-close.svg'
+import MenuCloseIconAlt from '../img/menu-close-alt.svg'
+import Modal from './Modal'
 
 import './Wrapper.css'
 
@@ -13,6 +17,7 @@ class Wrapper extends Component {
     admin: PropTypes.bool,
     dispatch: PropTypes.func,
     navToggled: PropTypes.bool,
+    type: PropTypes.string,
   }
 
   static MenuItems = [
@@ -39,13 +44,15 @@ class Wrapper extends Component {
   }
 
 	renderNavbar() {
-    const { admin, navToggled, dispatch } = this.props
+    const { admin, navToggled, dispatch, type } = this.props
+    const menuIcon = type === 'alt' ? MenuIconAlt : MenuIcon
+    const closeIcon = type === 'alt' ? MenuCloseIconAlt : MenuCloseIcon
 		return (
-      <div className="nav-purple">
+      <div className={type === 'alt' ? 'nav-white' : 'nav-purple'}>
   			<div style={{ padding: '2rem 0' }} className="ui container">
   				<div className="ui secondary menu">
             <div className="left menu">
-              <img onClick={() => dispatch({ type: 'SET_NAVBAR', payload: !navToggled } )} className="nav-icon" src={!navToggled ? MenuIcon : MenuCloseIcon} alt="Menu"/>
+              <img onClick={() => dispatch({ type: 'SET_NAVBAR', payload: !navToggled } )} className="nav-icon" src={!navToggled ? menuIcon : closeIcon} alt="Menu"/>
   				  </div>
 
   				  <div className="right menu">
@@ -78,6 +85,7 @@ class Wrapper extends Component {
         {navToggled ? <Sidebar items={MenuItems} /> : null}
 				{this.renderNavbar()}
 				{children}
+        <Modal />
 			</div>
 		)
 	}

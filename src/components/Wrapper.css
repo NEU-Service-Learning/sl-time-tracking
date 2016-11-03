@@ -10,6 +10,11 @@
   position: relative;
 }
 
+.nav-closed {
+  animation: mymove 5s sidebar-animation;
+
+}
+
 .nav-open {
   left: 300px;
   top: 50px;
@@ -17,4 +22,16 @@
   border-radius: 5px;
   overflow: hidden;
   box-shadow: -100px 50px 200px 0 rgba(0, 0, 0, .15);
+}
+
+
+@keyframes sidebar-animation {
+    0%   {
+      left: 0px;
+      top: 0px;
+    }
+    100% {
+      left: 300px;
+      top: 50px;
+    }
 }
