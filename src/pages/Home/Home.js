@@ -125,7 +125,7 @@ class Home extends Component {
                 ref="TimeInputWrapper"
                 className='form-control'
                 mountFocus='true'
-                onChange={(val) => this.handleDataChange('from', val)}
+                onTimeChange={(val) => this.handleDataChange('from', val)}
               />
             {this.renderDropdown('fromPeriod', ['am', 'pm'], 'fromPeriod')}
               <span>
@@ -145,7 +145,7 @@ class Home extends Component {
                 ref="TimeInputWrapper"
                 className='form-control'
                 mountFocus='true'
-                onChange={(val) => this.handleDataChange('to', val)}
+                onTimeChange={(val) => this.handleDataChange('to', val)}
               />
             {this.renderDropdown('toPeriod', ['am', 'pm'], 'toPeriod')}
               <span>
