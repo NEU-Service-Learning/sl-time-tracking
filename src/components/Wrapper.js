@@ -26,6 +26,11 @@ class Wrapper extends Component {
       routes: ['/', '/enter-time'],
     },
     {
+      label: 'Classes',
+      navbarTypes: ['alt'],
+      routes: ['/classes'],
+    },
+    {
       label: 'Settings',
       navbarTypes: ['alt'],
       routes: ['/settings'],

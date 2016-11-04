@@ -17,11 +17,16 @@
 }
 
 .nav-open {
-  position: relative;
+  position: fixed;
   transform: translate(300px, 0);
   animation: sidebar-animation 0.1s ease-out;
-  overflow: hidden;
+  overflow: scroll;
+  height: 100%;
   box-shadow: -100px 50px 200px 0 rgba(0, 0, 0, .15);
+}
+
+.nav-open .ui.container, .nav-open .nav-purple, .nav-open .nav-white {
+  padding: 0 100px;
 }
 
 
