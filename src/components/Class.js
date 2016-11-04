@@ -5,11 +5,12 @@ import './Class.css'
 
 export default class Class extends Component {
   static propTypes = {
-    time: PropTypes.string,
+    hours: PropTypes.string,
+    minutes: PropTypes.string,
     classTitle: PropTypes.string,
   }
   render () {
-    const { time, classTitle } = this.props
+    const { hours, minutes, classTitle } = this.props
     if (!classTitle) {
       return null
     }
@@ -20,7 +21,7 @@ export default class Class extends Component {
             Total Time
           </div>
           <div className='class-time'>
-            {time}
+            {hours} hours {minutes} minutes
           </div>
         </div>
         <Header className='class-middle' as='h3'>

@@ -10,15 +10,18 @@ export default class Classes extends Component {
       classes: [
         {
           classTitle: 'Class A',
-          time: '12:12',
+          hours: '12',
+          minutes: '12',
         },
         {
           classTitle: 'Class B',
-          time: '12:12',
+          hours: '12',
+          minutes: '12',
         },
         {
           classTitle: 'Class C',
-          time: '12:12',
+          hours: '12',
+          minutes: '12',
         },
       ],
     },
@@ -27,15 +30,18 @@ export default class Classes extends Component {
       classes: [
         {
           classTitle: 'Class A',
-          time: '12:12',
+          hours: '12',
+          minutes: '12',
         },
         {
           classTitle: 'Class B',
-          time: '12:12',
+          hours: '12',
+          minutes: '12',
         },
         {
           classTitle: 'Class C',
-          time: '12:12',
+          hours: '12',
+          minutes: '12',
         },
       ],
     },
@@ -46,11 +52,11 @@ export default class Classes extends Component {
         {
           Classes.classData.map(semester => (
             <div className='margin-bottom'>
-              <Header dividing as='h2'>
+              <Header dividing as='h3'>
                 {semester.semester}
               </Header>
               {
-                semester.classes.map(({time, classTitle}) => (<Class time={time} classTitle={classTitle} />))
+                semester.classes.map(({hours, minutes, classTitle}) => (<Class hours={hours} minutes={minutes} classTitle={classTitle} />))
               }
             </div>
           ))}
