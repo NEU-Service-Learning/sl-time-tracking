@@ -18,12 +18,20 @@ const defaultState = {
   time: {
     loading: false,
     error: null,
-    to: date.format('h:mm'),
-    toPeriod: date.format('a'),
-    from: prevDate.format('h:mm'),
-    fromPeriod: prevDate.format('a'),
-    startDate: moment(),
-    endDate: moment(),
+    start: {
+      hours: prevDate.format('hh'),
+      minutes: prevDate.format('mm'),
+      period: prevDate.format('a'),
+      date: moment(),
+    },
+    end: {
+      hours: date.format('hh'),
+      minutes: date.format('mm'),
+      period: date.format('a'),
+      date: moment(),
+    },
+    toReset: date.format('h:mm'),
+    fromReset: prevDate.format('h:mm'),
   },
 }
 

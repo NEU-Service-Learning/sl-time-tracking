@@ -1,16 +1,19 @@
 import React, { PropTypes, Component } from 'react'
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
 
 import './Sidebar.css'
 
 class Sidebar extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.string,
       label: PropTypes.string,
-      onClick: PropTypes.func,
-      active: PropTypes.bool,
+      routes: PropTypes.arrayOf(PropTypes.string),
     })),
     onToggle: PropTypes.func,
+    dispatch: PropTypes.func,
+    location: PropTypes.object,
+    navToggled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -19,12 +22,20 @@ class Sidebar extends Component {
   }
 
   renderItems() {
-    const { items } = this.props
+    const { location, items, dispatch, navToggled } = this.props
+    const { pathname } = location
     return items.map((item, index) => {
-      const { onClick, icon, label, active } = item
+      const { icon, label, routes } = item
+      const active = routes.indexOf(pathname) !== -1
       const className = active ? "active item" : "item"
       return (
-        <a key={index} onClick={onClick} className={className}>
+        <a
+          key={index}
+          onClick={() => {
+            dispatch({ type: 'SET_NAVBAR', payload: !navToggled })
+            dispatch(push(routes[0]))}
+          }
+          className={className}>
           <i className={icon}></i>
           {label}
         </a>
@@ -46,4 +57,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar
+export default connect()(Sidebar)

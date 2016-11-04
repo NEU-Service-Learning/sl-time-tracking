@@ -17,24 +17,23 @@ class Wrapper extends Component {
     admin: PropTypes.bool,
     dispatch: PropTypes.func,
     navToggled: PropTypes.bool,
-    type: PropTypes.string,
   }
 
   static MenuItems = [
     {
       label: 'Time Tracker',
-      onClick: () => {},
-      active: true,
+      navbarTypes: ['', 'alt'],
+      routes: ['/', '/enter-time'],
     },
     {
       label: 'Settings',
-      onClick: () => {},
-      active: false,
+      navbarTypes: ['alt'],
+      routes: ['/settings'],
     },
     {
       label: 'Help',
-      onClick: () => {},
-      active: false,
+      navbarTypes: [''],
+      routes: ['/help'],
     }
   ]
 
@@ -44,15 +43,26 @@ class Wrapper extends Component {
   }
 
 	renderNavbar() {
-    const { admin, navToggled, dispatch, type } = this.props
+    const { admin, navToggled, dispatch, location } = this.props
+    const { pathname } = location
+    let type = ''
+    Wrapper.MenuItems.forEach(item => {
+      const index = item.routes.indexOf(pathname)
+      if (index !== -1 && item.navbarTypes[index]) {
+        type = 'alt'
+      }
+    })
     const menuIcon = type === 'alt' ? MenuIconAlt : MenuIcon
     const closeIcon = type === 'alt' ? MenuCloseIconAlt : MenuCloseIcon
 		return (
       <div className={type === 'alt' ? 'nav-white' : 'nav-purple'}>
   			<div style={{ padding: '2rem 0' }} className="ui container">
-  				<div className="ui secondary menu">
+  				<div className="ui secondary menu" style={{ marginLeft: 0 }}>
             <div className="left menu">
-              <img onClick={() => dispatch({ type: 'SET_NAVBAR', payload: !navToggled } )} className="nav-icon" src={!navToggled ? menuIcon : closeIcon} alt="Menu"/>
+              <img onClick={(e) => {
+                  e.stopPropagation()
+                  dispatch({ type: 'SET_NAVBAR', payload: !navToggled })
+                }} className="nav-icon" src={!navToggled ? menuIcon : closeIcon} alt="Menu"/>
   				  </div>
 
   				  <div className="right menu">
@@ -77,14 +87,17 @@ class Wrapper extends Component {
 	}
 
 	render () {
-		const { children, navToggled } = this.props
+		const { children, navToggled, location, dispatch} = this.props
     const { MenuItems } = Wrapper
+
     const classNav = navToggled ? 'nav-open' : 'nav-closed'
 		return (
-			<div className={classNav}>
-        {navToggled ? <Sidebar items={MenuItems} /> : null}
-				{this.renderNavbar()}
-				{children}
+			<div>
+        {navToggled ? <Sidebar navToggled={navToggled} location={location} items={MenuItems} /> : null}
+        <div onClick={() => dispatch({ type: 'SET_NAVBAR', payload: false })} className={classNav}>
+				  {this.renderNavbar()}
+          {children}
+        </div>
         <Modal />
 			</div>
 		)

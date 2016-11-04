@@ -11,15 +11,15 @@
 }
 
 .nav-closed {
-  animation: mymove 5s sidebar-animation;
-
+  position: relative;
+  transform: translate(0px, 0);
+  animation: sidebar-animation-close 0.1s ease-out;
 }
 
 .nav-open {
-  left: 300px;
-  top: 50px;
   position: relative;
-  border-radius: 5px;
+  transform: translate(300px, 0);
+  animation: sidebar-animation 0.1s ease-out;
   overflow: hidden;
   box-shadow: -100px 50px 200px 0 rgba(0, 0, 0, .15);
 }
@@ -27,11 +27,18 @@
 
 @keyframes sidebar-animation {
     0%   {
-      left: 0px;
-      top: 0px;
+      transform: translate(0px, 0);
     }
     100% {
-      left: 300px;
-      top: 50px;
+      transform: translate(300px, 0);
+    }
+}
+
+@keyframes sidebar-animation-close {
+    0%   {
+      transform: translate(300px, 0);
+    }
+    100% {
+      transform: translate(0px, 0);
     }
 }

@@ -211,3 +211,14 @@
   flex: 1;
   display: inline-block;
 }
+
+
+@media (max-width: 700px) {
+  .home-text {
+    font-size: 30px;
+    padding: 1rem;
+  }
+  .home-text>div {
+    margin-bottom: 2rem;
+  }
+}

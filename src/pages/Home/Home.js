@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import TimeInput from 'react-time-input'
 import { push } from 'react-router-redux'
 
 import './Home.css'
 import Button from '../../components/Button'
 import Timeline from '../../components/Timeline'
+import TimeInput from '../../components/TimeInput'
+
 import { STUDENT_EDIT_TIME } from '../../redux/actions/action-types'
+const date = moment(new Date())
+const prevDate = moment(new Date()).subtract(1, 'hours')
 
 class Home extends Component {
   static propTypes = {
@@ -19,6 +22,7 @@ class Home extends Component {
     loading: PropTypes.bool,
     error: PropTypes.string,
     time: PropTypes.object,
+    dispatch: PropTypes.func,
   }
 
   static defaultProps = {
@@ -31,9 +35,14 @@ class Home extends Component {
     dispatch(push('/enter-time'))
   }
 
-  handleDataChange (type, val) {
+  handleStartChange (type, val) {
     const { dispatch } = this.props
-    dispatch({ type: STUDENT_EDIT_TIME, payload: { [type] : val }})
+    dispatch({ type: STUDENT_EDIT_TIME, payload: { start: { [type] : val }}})
+  }
+
+  handleEndChange (type, val) {
+    const { dispatch } = this.props
+    dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { [type] : val }}})
   }
 
   renderDropdown(name, options = [], defaultText = 'Select...') {
@@ -104,8 +113,8 @@ class Home extends Component {
   }
 
 	render () {
-    const { classes, time } = this.props
-    const { from, to, startDate, endDate } = time
+    const { classes, time, dispatch } = this.props
+    const { fromReset, toReset, start, end } = time
 		return (
       <div>
         <div className="home-container">
@@ -121,19 +130,23 @@ class Home extends Component {
                 from
               </span>
               <TimeInput
-                initTime={from}
-                ref="TimeInputWrapper"
-                className='form-control'
-                mountFocus='true'
-                onTimeChange={(val) => this.handleDataChange('from', val)}
+                hours={start.hours}
+                minutes={start.minutes}
+                onChange={(data) => dispatch({ type: STUDENT_EDIT_TIME, payload: { start: { ...start, ...data }}})}
               />
-            {this.renderDropdown('fromPeriod', ['am', 'pm'], 'fromPeriod')}
+              <select
+                defaultValue={start.period} onChange={(period) => dispatch({ type: STUDENT_EDIT_TIME, payload: { start: { ...start, period }}})}
+                className="home-dropdown"
+              >
+                <option value="am">AM</option>
+                <option value="pm">PM</option>
+              </select>
               <span>
                 on
               </span>
               <DatePicker
-                selected={startDate}
-                onChange={(val) => this.handleDataChange('startDate', val)}
+                selected={start.date}
+                onChange={(date) => dispatch({ type: STUDENT_EDIT_TIME, payload: { start: { ...start, date }}})}
                 />
             </div>
             <div>
@@ -141,19 +154,24 @@ class Home extends Component {
                 to
               </span>
               <TimeInput
-                initTime={to}
-                ref="TimeInputWrapper"
-                className='form-control'
-                mountFocus='true'
-                onTimeChange={(val) => this.handleDataChange('to', val)}
+                hours={end.hours}
+                minutes={end.minutes}
+                onChange={(data) => dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { ...end, ...data }}})}
               />
-            {this.renderDropdown('toPeriod', ['am', 'pm'], 'toPeriod')}
+              <select
+                defaultValue={end.period} onChange={(period) => dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { ...end, period }}})}
+                className="home-dropdown"
+              >
+                <option value="am">AM</option>
+                <option value="pm">PM</option>
+              </select>
               <span>
                 on
               </span>
               <DatePicker
-                selected={endDate}
-                onChange={(val) => this.handleDataChange('endDate', val)} />
+                selected={end.date}
+                onChange={(date) => dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { ...end, date }}})}
+                />
             </div>
           </div>
           <div className="ui large buttons">
