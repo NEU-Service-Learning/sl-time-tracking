@@ -27,9 +27,9 @@ export default class TimeInput extends Component {
     const { spanClassName, className, value, hours, minutes } = this.props
     return (
       <div className={className ? className : 'inline-block'}>
-        <input placeholder="XX" value={hours} type="number" onChange={(e) => this.handleOnChange('hours', e)} />
+        <input name="hours" placeholder="XX" value={hours} type="number" onChange={(e) => this.handleOnChange('hours', e)} />
         <span className={spanClassName} style={{ padding: '0 4px' }}>:</span>
-        <input placeholder="XX" value={minutes} type="number" onChange={(e) => this.handleOnChange('minutes', e)} />
+        <input name="minutes" placeholder="XX" value={minutes} type="number" onChange={(e) => this.handleOnChange('minutes', e)} />
       </div>
     )
   }

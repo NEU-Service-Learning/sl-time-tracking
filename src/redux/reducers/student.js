@@ -16,8 +16,6 @@ const defaultState = {
   firstName: '',
   lastName: '',
   time: {
-    loading: false,
-    error: null,
     start: {
       hours: prevDate.format('hh'),
       minutes: prevDate.format('mm'),
@@ -50,30 +48,24 @@ export function studentReducer (state = defaultState, { type, payload }) {
     case STUDENT_ADD_TIME_LOADING: {
       return {
         ...state,
-        time: {
-          loading: true,
-          error: null,
-        }
+        loading: true,
+        error: null,
       }
     }
     // Success after adding time
     case STUDENT_ADD_TIME_SUCCESS: {
       return {
         ...state,
-        time: {
-          loading: false,
-          error: null,
-        }
+        loading: true,
+        error: null,
       }
     }
     // Error after you tried to add time
     case STUDENT_ADD_TIME_ERROR: {
       return {
         ...state,
-        time: {
-          loading: false,
-          error: payload,
-        }
+        loading: true,
+        error: null,
       }
     }
     default: {
