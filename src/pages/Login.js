@@ -6,17 +6,15 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {email: "", password: ""};
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     alert("Email is: " + this.state.email);
   }
-  handleChangeEmail(event) {
+  handleChangeEmail = (event) => {
     this.setState({email: event.target.value, password : this.state.password})
   }
-  handleChangePassword(event) {
+  handleChangePassword = (event) => {
     this.setState({password: event.target.value, email : this.state.email})
   }
   render () {
