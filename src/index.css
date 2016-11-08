@@ -1,5 +1,32 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Lato, sans-serif;
+  background-color: #f6f6f6;
+}
+
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+
+.ui.container {
+  position: relative;
+  transform: translate(0px, 0);
+  animation: app-animation 0.1s ease-out;
+}
+
+@keyframes app-animation {
+    0%   {
+      transform: translate(300px, 0);
+    }
+    100% {
+      transform: translate(0px, 0);
+    }
 }

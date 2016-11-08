@@ -1,0 +1,224 @@
+.home-container {
+  text-align: center;
+  padding-bottom: 6rem;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5d477e+0,2b2d62+100 */
+  background: #5d477e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #5d477e 0%, #2b2d62 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #5d477e 0%,#2b2d62 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #5d477e 0%,#2b2d62 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d477e', endColorstr='#2b2d62',GradientType=0 ); /* IE6-9 */
+}
+
+.home-text {
+  padding: 4rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.home-text>div {
+  margin-bottom: 1rem;
+}
+
+.home-text input, .home-text select, .react-datepicker__input-container input {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  padding: 1rem 0;
+  display: inline-block;
+  width: 150px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.home-timeline-row {
+  display: flex;
+}
+
+.home-text select {
+  width: auto;
+  border-bottom: 0px;
+}
+
+.react-datepicker__input-container input {
+  width: 220px;
+}
+
+.home-button {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  color: white !important;
+  font-weight: 300 !important;
+}
+
+.home-button:hover {
+  background-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.home-or:before {
+  background-color: #353268 !important;
+  color: white !important;
+}
+
+.home-filter-container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.home-bottom {
+  color: #555555;
+  padding-bottom: 2rem;
+  background-color: #f6f6f6;
+}
+
+.home-filter {
+  background-color: white;
+  padding: 0.75rem 1.5rem;
+  margin-right: 1rem;
+  border-radius: 2.5px;
+  border-bottom: 4px #f2f2f2 solid;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.home-timeline {
+  flex: 1;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.home-timeline-date {
+  align-self: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 120px;
+}
+
+.home-timeline-date>div {
+  color: #adadad;
+}
+
+.home-timeline-block {
+  background-color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  font-size: 16px;
+  justify-content: space-between;
+  border-radius: 2.5px;
+  border-bottom: 4px #f2f2f2 solid;
+}
+
+.home-timeline-container {
+  height: 100%;
+  padding-bottom: 1rem;
+}
+
+.home-timeline-time {
+  color: #adadad;
+}
+
+.home-timeline-time>div {
+  padding-top: 0.5rem;
+  color: #555555;
+}
+
+.home-header {
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  color: #555555 !important;
+}
+
+
+.home-timeline-dot {
+  height: 20px;
+  width: 20px;
+  align-self: center;
+  display: inline-block;
+  border: 1px solid #4d3f73;
+  border-radius: 50%;
+}
+
+.home-timeline-dot.old {
+  border: 1px solid rgba(34,36,38,.15);
+  background-color: rgba(34,36,38,.15);
+}
+
+.home-stats-container {
+  border-radius: 2.5px;
+  padding: 1rem;
+  border: 1px solid rgba(34,36,38,.15);
+}
+
+.home-stats-header {
+  padding: 1rem;
+}
+
+.home-stats-block {
+  padding:  0 1rem;
+  margin-bottom: 1rem;
+}
+
+.home-stats-bar {
+  border-radius: 10px;
+  background-color: #8053b8;
+}
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.home-stats-block>div:first-child {
+  color: #a3a3a3;
+}
+
+.home-stats-header>span:first-child {
+  font-size: 20px;
+  color: #555555;
+}
+
+.home-timeline-row.flex-space-between {
+  padding-top: 0.5rem;
+  height: 19px;
+}
+
+.home-stats-header>span:last-child {
+  font-size: 20px;
+  color: #a3a3a3;
+  padding: 0 1rem;
+}
+
+.home-timeline-col {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+}
+
+
+.home-timeline-line {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+.home-timeline-line>div:first-child {
+  border-right: 1px solid rgba(34,36,38,.15);
+  flex: 1;
+  display: inline-block;
+}
+
+.home-timeline-line>div:last-child {
+  flex: 1;
+  display: inline-block;
+}
+
+
+@media (max-width: 700px) {
+  .home-text {
+    font-size: 30px;
+    padding: 1rem;
+  }
+  .home-text>div {
+    margin-bottom: 2rem;
+  }
+}

@@ -1,0 +1,29 @@
+.class-container {
+  border-bottom: 4px solid #f2f2f2;
+  background-color: white;
+  color: #555555;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 2.5px;
+}
+
+
+.class-title {
+  color: #adadad;
+}
+
+
+.class-middle {
+  font-weight: 400 !important;
+  margin: 0 !important;
+}
+
+.class-container * {
+  align-self: center;
+}
+
+.margin-bottom {
+  margin-bottom: 2rem;
+}

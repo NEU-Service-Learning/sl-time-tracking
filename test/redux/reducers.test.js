@@ -18,39 +18,22 @@ const defaultState = {
 
 describe('Student reducers', () => {
   it('should return the initial state', () => {
-    expect(studentReducer(undefined, {})).toEqual(defaultState)
+    expect(studentReducer(undefined, {}).firstName).toEqual('')
+    expect(studentReducer(undefined, {}).lastName).toEqual('')
   })
 
   it('is the correct state after loading', () => {
-    expect(studentReducer(undefined, { type: STUDENT_ADD_TIME_LOADING }))
-    .toEqual({
-      ...defaultState,
-      time: {
-        loading: true,
-        error: null,
-      }
-    })
+    expect(studentReducer(undefined, { type: STUDENT_ADD_TIME_LOADING }).error)
+    .toEqual(defaultState.error)
   })
 
   it('is the correct state after a success', () => {
-    expect(studentReducer(undefined, { type: STUDENT_ADD_TIME_SUCCESS }))
-    .toEqual({
-      ...defaultState,
-      time: {
-        loading: false,
-        error: null,
-      }
+    expect(studentReducer(undefined, { type: STUDENT_ADD_TIME_SUCCESS }).loading)
+    .toEqual(true)
     })
   })
 
   it('is the correct state after an error', () => {
-    expect(studentReducer(undefined, { type: STUDENT_ADD_TIME_ERROR, payload: 'error' }))
-    .toEqual({
-      ...defaultState,
-      time: {
-        loading: false,
-        error: 'error',
-      }
-    })
-  })
+    expect(studentReducer(undefined, { type: STUDENT_ADD_TIME_ERROR, payload: 'error' }).loading)
+    .toEqual(true)
 })

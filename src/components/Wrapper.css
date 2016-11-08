@@ -1,0 +1,49 @@
+.nav-icon {
+  align-self: center;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.nav-purple {
+  background-color: #5d477e;
+  position: relative;
+}
+
+.nav-closed {
+  position: relative;
+  transform: translate(0px, 0);
+  animation: sidebar-animation-close 0.1s ease-out;
+}
+
+.nav-open {
+  position: fixed;
+  transform: translate(300px, 0);
+  animation: sidebar-animation 0.1s ease-out;
+  overflow: scroll;
+  height: 100%;
+  box-shadow: -100px 50px 200px 0 rgba(0, 0, 0, .15);
+}
+
+.nav-open .ui.container, .nav-open .nav-purple, .nav-open .nav-white {
+  padding: 0 100px;
+}
+
+
+@keyframes sidebar-animation {
+    0%   {
+      transform: translate(0px, 0);
+    }
+    100% {
+      transform: translate(300px, 0);
+    }
+}
+
+@keyframes sidebar-animation-close {
+    0%   {
+      transform: translate(300px, 0);
+    }
+    100% {
+      transform: translate(0px, 0);
+    }
+}
