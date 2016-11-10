@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment'
-import { Header, Divider, Card, Image } from 'semantic-ui-react'
+import { Header, Divider, Card, Image, Dropdown } from 'semantic-ui-react'
 
 import { STUDENT_EDIT_TIME } from '../../redux/actions/action-types'
 import TimeInput from '../../components/TimeInput'
@@ -49,9 +49,19 @@ class EnterTime extends Component {
           <div className="column">
             <Header dividing as="h4">
               <Header.Content>
-                Entering Time
+                Entering Time for \Class/
               </Header.Content>
             </Header>
+            <div className="field">
+              <label>Type of Service‏</label>
+              <Dropdown placeholder='Select Type of Service' fluid multiple search selection options={['foo', 'bar']} />
+            </div>
+            <br/>
+            <div className="field">
+              <label>Project</label>
+              <Dropdown placeholder='Select Project' fluid selection options={[]} />
+            </div>
+            <br/>
             <div className={`ui ${warning ? 'warning' : ''} form`}>
               <div className="three fields">
                 <div className="two field">
