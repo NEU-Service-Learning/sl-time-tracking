@@ -121,7 +121,7 @@ class Home extends Component {
           <div className="home-text">
             <div>
               <span>
-                I served at
+                I served for 
               </span>
               {this.renderDropdown('class', classes.map((item) => item.name), 'class')}
             </div>

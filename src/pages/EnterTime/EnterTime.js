@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment'
-import { Header, Divider, Card, Image } from 'semantic-ui-react'
+import { Header, Divider, Card, Image, Dropdown } from 'semantic-ui-react'
 
 import { STUDENT_EDIT_TIME } from '../../redux/actions/action-types'
 import TimeInput from '../../components/TimeInput'
@@ -21,6 +21,7 @@ class EnterTime extends Component {
     super(props)
     this.state = {
       warning: '',
+      defaultServiceTypes: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research and Planning'}, {'value': 'individual', 'text': 'Individual Research and Planning'}, {'value': 'training', 'text': 'Training and Orientation'}]
     }
   }
 
@@ -49,10 +50,20 @@ class EnterTime extends Component {
           <div className="column">
             <Header dividing as="h4">
               <Header.Content>
-                Entering Time
+                Entering Time for \Class/
               </Header.Content>
             </Header>
             <div className={`ui ${warning ? 'warning' : ''} form`}>
+              <div className="field">
+                <label>Type of Service‏</label>
+                <Dropdown placeholder='Select Type of Service' fluid search selection options={this.state.defaultServiceTypes} />
+              </div>
+              <br/>
+              <div className="field">
+                <label>Project</label>
+                <Dropdown placeholder='Select Project' fluid selection options={[]} />
+              </div>
+              <br/>
               <div className="three fields">
                 <div className="two field">
                   <label>Start Time</label>
