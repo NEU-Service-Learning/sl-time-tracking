@@ -26,7 +26,7 @@ class Home extends Component {
   }
 
   static defaultProps = {
-    classes: [{ name: 'Class A' }, { name: 'Class B' }],
+    classes: [{ name: 'CS 4500: Software Development' }, { name: 'ANTH 5513: Ancient Greek History' }],
   }
 
   onClickSubmit = () => {
@@ -121,7 +121,7 @@ class Home extends Component {
           <div className="home-text">
             <div>
               <span>
-                I served for 
+                I served for
               </span>
               {this.renderDropdown('class', classes.map((item) => item.name), 'class')}
             </div>
