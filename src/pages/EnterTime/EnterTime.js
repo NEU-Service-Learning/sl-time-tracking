@@ -21,6 +21,7 @@ class EnterTime extends Component {
     super(props)
     this.state = {
       warning: '',
+      defaultServiceTypes: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research and Planning'}, {'value': 'individual', 'text': 'Individual Research and Planning'}, {'value': 'training', 'text': 'Training and Orientation'}]
     }
   }
 
@@ -52,17 +53,17 @@ class EnterTime extends Component {
                 Entering Time for \Class/
               </Header.Content>
             </Header>
-            <div className="field">
-              <label>Type of Service‏</label>
-              <Dropdown placeholder='Select Type of Service' fluid multiple search selection options={['foo', 'bar']} />
-            </div>
-            <br/>
-            <div className="field">
-              <label>Project</label>
-              <Dropdown placeholder='Select Project' fluid selection options={[]} />
-            </div>
-            <br/>
             <div className={`ui ${warning ? 'warning' : ''} form`}>
+              <div className="field">
+                <label>Type of Service‏</label>
+                <Dropdown placeholder='Select Type of Service' fluid search selection options={this.state.defaultServiceTypes} />
+              </div>
+              <br/>
+              <div className="field">
+                <label>Project</label>
+                <Dropdown placeholder='Select Project' fluid selection options={[]} />
+              </div>
+              <br/>
               <div className="three fields">
                 <div className="two field">
                   <label>Start Time</label>
