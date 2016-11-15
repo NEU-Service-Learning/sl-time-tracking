@@ -85,7 +85,7 @@ class Home extends Component {
 
       </div>
     )
-  }
+  }  
 
   renderBottom() {
     const { classes } = this.props
