@@ -37,6 +37,11 @@ class Wrapper extends Component {
       routes: ['/settings'],
     },
     {
+      label: 'Admin',
+      navbarTypes: ['alt'],
+      routes: ['/admin'],
+    },
+    {
       label: 'Help',
       navbarTypes: [''],
       routes: ['/help'],
@@ -74,7 +79,7 @@ class Wrapper extends Component {
               SERVICE LEARNING TIME TRACKER
             </div>
   				  <div style={{ padding: '1rem 0' }} className="right menu">
-              <Icon onClick={() => dispatch(push('/classes'))} color='#fff' inverted={type !== 'alt'} link size="big" name="setting" />
+              <Icon onClick={() => dispatch(push('/settings'))} color='#fff' inverted={type !== 'alt'} link size="big" name="setting" />
   				  </div>
   				</div>
         </div>
