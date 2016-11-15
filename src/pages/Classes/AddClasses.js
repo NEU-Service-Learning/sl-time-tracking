@@ -49,6 +49,12 @@ export default class AddClasses extends Component {
           <i className="right arrow icon"></i>
         </div>
       </button>
+      <br/><br/>
+      <Header dividing as="h4">
+        <Header.Content>
+          Classes You Are A Part Of
+        </Header.Content>
+      </Header>
       </Container>
     )
   }
