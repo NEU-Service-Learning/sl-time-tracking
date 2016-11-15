@@ -87,6 +87,8 @@ class Home extends Component {
     )
   }
 
+
+
   renderBottom() {
     const { classes } = this.props
     return (
@@ -98,7 +100,7 @@ class Home extends Component {
           </div>
           <div className="home-timeline-container">
             <h3 className="ui dividing header home-header">Timeline</h3>
-            <div className="ui grid">
+            <div className="ui stackable two column grid">
               <div className="ten wide column">
                 <Timeline />
               </div>
