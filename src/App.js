@@ -21,7 +21,7 @@ const paths = {
   ENTER_TIME: '/enter-time',
   SETTINGS: '/settings',
   CLASSES: '/classes',
-  ADD_CLASSES: '/add-classes',
+  ADD_CLASSES: '/classes/add',
 };
 
 const getRoutes = getState => {

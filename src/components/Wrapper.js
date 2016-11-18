@@ -31,9 +31,9 @@ class Wrapper extends Component {
       routes: ['/classes'],
     },
     {
-      label: 'Add Projects',
+      label: 'Register for Classes',
       navbarTypes: [''],
-      routes: ['/add-classes'],
+      routes: ['/classes/add'],
     },
     {
       label: 'Settings',

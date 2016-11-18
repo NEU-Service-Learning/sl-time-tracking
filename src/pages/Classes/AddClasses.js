@@ -45,8 +45,7 @@ export default class AddClasses extends Component {
   render () {
     return (
       <Container>
-      <br/><br/>
-      <div className="ui grid container">
+      <div className="ui grid container outer-container">
         <div className="eight wide column">
         <div className='ui form'>
           <Header dividing as="h4">
