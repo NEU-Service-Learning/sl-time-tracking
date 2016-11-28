@@ -16,6 +16,11 @@
   animation: sidebar-animation-close 0.1s ease-out;
 }
 
+.self-align-center {
+  align-content: center;
+  align-self: center;
+}
+
 .nav-open {
   position: fixed;
   transform: translate(300px, 0);

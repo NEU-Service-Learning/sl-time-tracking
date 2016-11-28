@@ -28,7 +28,7 @@ export default class Class extends Component {
          {classTitle}
         </Header>
         <div className='class-left'>
-          <Icon name='trash outline' />
+          <Icon size="big" name='ellipsis vertical' />
         </div>
       </div>
     )

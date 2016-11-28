@@ -21,7 +21,8 @@ class EnterTime extends Component {
     super(props)
     this.state = {
       warning: '',
-      defaultServiceTypes: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research and Planning'}, {'value': 'individual', 'text': 'Individual Research and Planning'}, {'value': 'training', 'text': 'Training and Orientation'}]
+      defaultServiceTypes: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research and Planning'}, {'value': 'individual', 'text': 'Individual Research and Planning'}, {'value': 'training', 'text': 'Training and Orientation'}],
+      defaultProjectTypes: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
     }
   }
 
@@ -40,7 +41,7 @@ class EnterTime extends Component {
   }
 
   render () {
-    const { warning } = this.state
+    const { warning, defaultServiceTypes, defaultProjectTypes } = this.state
     const src = 'http://semantic-ui.com/images/avatar/large/daniel.jpg'
     const { time, dispatch } = this.props
     const { start, end } = time
@@ -50,18 +51,18 @@ class EnterTime extends Component {
           <div className="column">
             <Header dividing as="h4">
               <Header.Content>
-                Entering Time for \Class/
+                Entering Time
               </Header.Content>
             </Header>
             <div className={`ui ${warning ? 'warning' : ''} form`}>
               <div className="field">
                 <label>Type of Service‏</label>
-                <Dropdown placeholder='Select Type of Service' fluid search selection options={this.state.defaultServiceTypes} />
+                <Dropdown placeholder='Select Type of Service' fluid selection options={defaultServiceTypes} />
               </div>
               <br/>
               <div className="field">
                 <label>Project</label>
-                <Dropdown placeholder='Select Project' fluid selection options={[]} />
+                <Dropdown placeholder='Select Project' fluid selection options={defaultProjectTypes} />
               </div>
               <br/>
               <div className="three fields">

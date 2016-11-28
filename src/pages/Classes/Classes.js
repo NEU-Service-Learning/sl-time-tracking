@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Container, Header } from 'semantic-ui-react'
+import { Container, Header, Button } from 'semantic-ui-react'
 
 import Class from '../../components/Class'
 
@@ -52,7 +52,7 @@ export default class Classes extends Component {
         {
           Classes.classData.map(semester => (
             <div className='margin-bottom'>
-              <Header dividing as='h3'>
+              <Header as='h3'>
                 {semester.semester}
               </Header>
               {
@@ -60,6 +60,7 @@ export default class Classes extends Component {
               }
             </div>
           ))}
+          <Button floated="right" labelPosition='left' content="Add Semester" icon="plus" />
       </Container>
     )
   }
