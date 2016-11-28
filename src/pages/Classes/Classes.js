@@ -52,7 +52,7 @@ export default class Classes extends Component {
         {
           Classes.classData.map(semester => (
             <div className='margin-bottom'>
-              <Header dividing as='h3'>
+              <Header as='h3'>
                 {semester.semester}
               </Header>
               {

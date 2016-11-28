@@ -41,11 +41,6 @@ class Wrapper extends Component {
       navbarTypes: ['alt'],
       routes: ['/admin'],
     },
-    {
-      label: 'Help',
-      navbarTypes: [''],
-      routes: ['/help'],
-    }
   ]
 
   handleClick = () => {
