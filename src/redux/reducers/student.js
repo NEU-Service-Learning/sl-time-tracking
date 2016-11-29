@@ -16,6 +16,8 @@ const defaultState = {
   firstName: '',
   lastName: '',
   time: {
+    selectedService: '',
+    selectedProject: '',
     start: {
       hours: prevDate.format('hh'),
       minutes: prevDate.format('mm'),
