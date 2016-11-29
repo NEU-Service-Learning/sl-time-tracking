@@ -13,7 +13,7 @@ class Admin extends Component {
       modal: false,
       modalStudent: false,
       selectedClass: false,
-      classEditing: false,
+      classEditing: true,
     }
   }
 
@@ -147,9 +147,11 @@ class Admin extends Component {
       </Table.Row>
     </Table.Body>
   </Table>
-  {classEditing ? (
-      <Button size='small' basic onClick={() => this.setState({ modalStudent: true })} fluid content='Add Student' icon='add user' />
-  ) : null}
+  <Button.Group size='small' fluid>
+    <Button onClick={() => this.setState({ modalStudent: true })} content='Add Student' icon='add user' />
+    <Button content='Add TA' icon='add user' />
+    <Button content='Add Project' icon='plus' />
+  </Button.Group>
   </div>
   )
   }
