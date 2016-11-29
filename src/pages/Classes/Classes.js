@@ -60,7 +60,7 @@ export default class Classes extends Component {
               }
             </div>
           ))}
-          <Button floated="right" labelPosition='left' content="Add Semester" icon="plus" />
+          <Button floated="right" labelPosition='left' content="Add Class" icon="plus" />
       </Container>
     )
   }

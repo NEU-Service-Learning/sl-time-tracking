@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { Form, Modal, Divider, Icon, Extra, Container, Header, Grid, Content, Button,  Input, Menu, Segment, Card, Group, Item, Image, Description} from 'semantic-ui-react'
+import { Checkbox, TextArea, Table, Form, Modal, Divider, Icon, Extra, Container, Header, Grid, Content, Button,  Input, Menu, Segment, Card, Group, Item, Image, Description} from 'semantic-ui-react'
 
 class Admin extends Component {
   static propTypes = {
@@ -12,6 +12,8 @@ class Admin extends Component {
       activeItem: 'class',
       modal: false,
       modalStudent: false,
+      selectedClass: false,
+      classEditing: false,
     }
   }
 
@@ -47,6 +49,111 @@ class Admin extends Component {
     )
   }
 
+  renderTable() {
+    const { classEditing } = this.state
+    return (
+    <div>
+      <Header as='h4'>Description</Header>
+      {classEditing ? <Form><TextArea style={{ height: '6em', marginBottom: '1em' }} fluid>{this.state.selectedClass.description}</TextArea></Form> : <p>{this.state.selectedClass.description}</p>}
+      { this.state.classEditing ?
+        <Button.Group size='small' style={{ marginBottom: '1em' }}>
+            <Button>Remove Students</Button>
+            <Button>Move Students</Button>
+        </Button.Group>
+        : null
+      }
+    <Table singleLine>
+      <Table.Header>
+        <Table.Row>
+         {classEditing ? <Table.HeaderCell>Select</Table.HeaderCell> : null}
+          <Table.HeaderCell>Student</Table.HeaderCell>
+          <Table.HeaderCell>Projects</Table.HeaderCell>
+          <Table.HeaderCell>Total Time</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+
+      <Table.Body>
+        <Table.Row>
+          {classEditing ? <Table.Cell><Checkbox /></Table.Cell> : null}
+          <Table.Cell>
+            <Header as='h4' image>
+              <Image src='http://semantic-ui.com/images/avatar2/small/lena.png' shape='rounded' size='mini' />
+              <Header.Content>
+                Lena
+                <Header.Subheader>lena@husky.neu.edu</Header.Subheader>
+              </Header.Content>
+            </Header>
+          </Table.Cell>
+          <Table.Cell>
+            Time Tracking
+          </Table.Cell>
+          <Table.Cell>
+            22
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          {classEditing ? <Table.Cell><Checkbox /></Table.Cell>: null}
+          <Table.Cell>
+            <Header as='h4' image>
+              <Image src='http://semantic-ui.com/images/avatar2/small/matthew.png' shape='rounded' size='mini' />
+              <Header.Content>
+                Matthew
+                <Header.Subheader>matthew@husky.neu.edu</Header.Subheader>
+              </Header.Content>
+            </Header>
+          </Table.Cell>
+          <Table.Cell>
+            Time Tracking
+          </Table.Cell>
+          <Table.Cell>
+            15
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          {classEditing ? <Table.Cell><Checkbox /></Table.Cell>: null}
+          <Table.Cell>
+            <Header as='h4' image>
+              <Image src='http://semantic-ui.com/images/avatar2/small/lindsay.png' shape='rounded' size='mini' />
+              <Header.Content>
+                Lindsay
+                <Header.Subheader>lindsay@husky.neu.edu</Header.Subheader>
+              </Header.Content>
+            </Header>
+          </Table.Cell>
+          <Table.Cell>
+            Time Tracking
+          </Table.Cell>
+          <Table.Cell>
+            12
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          {classEditing ? <Table.Cell><Checkbox /></Table.Cell> : null}
+          <Table.Cell>
+            <Header as='h4' image>
+              <Image src='http://semantic-ui.com/images/avatar2/small/mark.png' shape='rounded' size='mini' />
+              <Header.Content>
+                Mark
+                <Header.Subheader>mark@husky.neu.edu</Header.Subheader>
+              </Header.Content>
+            </Header>
+          </Table.Cell>
+          <Table.Cell>
+            Time Tracking
+          </Table.Cell>
+          <Table.Cell>
+            11
+          </Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+  {classEditing ? (
+      <Button size='small' basic onClick={() => this.setState({ modalStudent: true })} fluid content='Add Student' icon='add user' />
+  ) : null}
+  </div>
+  )
+  }
+
   renderClasses () {
     const { classes } = this.props
     return (
@@ -61,7 +168,8 @@ class Admin extends Component {
                </Header>
                <Item.Description>{item.description}</Item.Description>
                <Item.Extra>
-                 <Button.Group float='right' basic size='small'>
+                 <Button size='small' onClick={() => this.setState({ selectedClass: item })} content='Edit' />
+                 <Button.Group style={{ float: 'right' }} basic size='small'>
                     <Button content='Remove' icon='trash outline' />
                     <Button content='Duplicate' icon='clone' />
                  </Button.Group>
@@ -73,7 +181,7 @@ class Admin extends Component {
     )
   }
   render () {
-    const { activeItem } = this.state
+    const { activeItem, selectedClass } = this.state
     return (
       <Container>
         <Menu attached='top' tabular>
@@ -83,12 +191,41 @@ class Admin extends Component {
             <Menu.Item>
               <Input transparent icon={{ name: 'search', link: 'true' }} placeholder={`Search ${activeItem}s...`} />
             </Menu.Item>
+            <Menu.Item style={{ paddingRight: 0 }}>
+              <Button >Export CSV</Button>
+            </Menu.Item>
           </Menu.Menu>
         </Menu>
 
         <Segment attached='bottom'>
           {activeItem === 'class' ? this.renderClasses() : this.renderStudents()}
         </Segment>
+        <Modal
+          dimmer='blurring'
+          open={selectedClass}
+          onClose={() => this.setState({ selectedClass: false })}
+          size='medium'
+        >
+        <Modal.Header>
+          <Header as='h2'>
+            {selectedClass.name}
+            <Header.Subheader as='a'>{selectedClass.semester}</Header.Subheader>
+          </Header>
+        </Modal.Header>
+          <Modal.Content>
+            {this.renderTable()}
+          </Modal.Content>
+          <Modal.Actions>
+            {this.state.classEditing ?
+              <Button onClick={() => this.setState({ classEditing: false, selectedClass: false })}>
+                <Icon name='checkmark' /> Save Changes
+              </Button>
+            : <Button onClick={() => this.setState({ classEditing: true })}>
+                Edit
+              </Button>
+            }
+          </Modal.Actions>
+        </Modal>
         <Modal
           dimmer='blurring'
           open={this.state.modal}
