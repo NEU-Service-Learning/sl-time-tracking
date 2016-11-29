@@ -23,10 +23,14 @@ class Home extends Component {
     error: PropTypes.string,
     time: PropTypes.object,
     dispatch: PropTypes.func,
+    services: PropTypes.array,
+    projects: PropTypes.array,
   }
 
   static defaultProps = {
     classes: [{ name: 'CS 4500: Software Development' }, { name: 'ANTH 5513: Ancient Greek History' }],
+    services: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research'}, {'value': 'individual', 'text': 'Individual Research'}, {'value': 'training', 'text': 'Training'}],
+    projects: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
   }
 
   onClickSubmit = () => {
@@ -44,16 +48,6 @@ class Home extends Component {
     const { dispatch } = this.props
     dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { [type] : val }}})
   }
-
-  renderDropdown(name, options = [], defaultText = 'Select...') {
-    const { time } = this.props
-    return (
-      <select defaultValue={time[name]} onChange={(e) => this.handleDataChange(name, e.target.value)} name={name} className="home-dropdown">
-        {options.map(item => (<option key={item} value={item}>{item}</option>))}
-      </select>
-    )
-  }
-
 
   renderStats() {
     return (
@@ -113,8 +107,8 @@ class Home extends Component {
   }
 
 	render () {
-    const { classes, time, dispatch } = this.props
-    const { fromReset, toReset, start, end } = time
+    const { classes, time, dispatch, services, projects } = this.props
+    const { fromReset, toReset, start, end, selectedService, selectedProject } = time
 		return (
       <div>
         <div className="home-container">
@@ -123,7 +117,15 @@ class Home extends Component {
               <span>
                 I served for
               </span>
-              {this.renderDropdown('class', classes.map((item) => item.name), 'class')}
+              <select defaultValue={selectedService} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedService: e.target.value }})} name='selectedService' className="home-dropdown">
+                {services.map(item => (<option key={item.value} value={item.value}>{item.text}</option>))}
+              </select>
+              <span>
+                working on
+              </span>
+              <select defaultValue={selectedProject} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedProject: e.target.value }})} name='selectedProject' className="home-dropdown">
+                {projects.map(item => (<option key={item.value} value={item.value}>{item.text}</option>))}
+              </select>
             </div>
             <div>
               <span>

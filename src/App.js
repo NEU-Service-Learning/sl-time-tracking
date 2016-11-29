@@ -9,7 +9,7 @@ import Settings from './pages/Settings/Settings'
 import Wrapper from './components/Wrapper'
 import Classes from './pages/Classes/Classes'
 import AddClasses from './pages/Classes/AddClasses'
-
+import Admin from './pages/Admin/Admin'
 
 import configureStore from './redux/store'
 
@@ -19,6 +19,7 @@ const syncHistory = syncHistoryWithStore(browserHistory, store)
 const paths = {
   ROOT: '/',
   ENTER_TIME: '/enter-time',
+  ADMIN: '/admin',
   SETTINGS: '/settings',
   CLASSES: '/classes',
   ADD_CLASSES: '/classes/add',
@@ -38,6 +39,10 @@ const getRoutes = getState => {
       {
         path: paths.ENTER_TIME,
         component: EnterTime,
+      },
+      {
+        path: paths.ADMIN,
+        component: Admin,
       },
       {
         path: paths.SETTINGS,

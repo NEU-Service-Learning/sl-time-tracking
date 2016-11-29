@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Icon, Button } from 'semantic-ui-react'
+import { push } from 'react-router-redux'
 
-import Button from './Button'
 import Sidebar from './Sidebar'
 import MenuIcon from '../img/menu.svg'
 import MenuIconAlt from '../img/menu-alt.svg'
@@ -41,10 +42,10 @@ class Wrapper extends Component {
       routes: ['/settings'],
     },
     {
-      label: 'Help',
-      navbarTypes: [''],
-      routes: ['/help'],
-    }
+      label: 'Admin',
+      navbarTypes: ['alt'],
+      routes: ['/admin'],
+    },
   ]
 
   handleClick = () => {
@@ -53,7 +54,7 @@ class Wrapper extends Component {
   }
 
 	renderNavbar() {
-    const { admin, navToggled, dispatch, location } = this.props
+    const { navToggled, dispatch, location } = this.props
     const { pathname } = location
     let type = ''
     Wrapper.MenuItems.forEach(item => {
@@ -74,20 +75,11 @@ class Wrapper extends Component {
                   dispatch({ type: 'SET_NAVBAR', payload: !navToggled })
                 }} className="nav-icon" src={!navToggled ? menuIcon : closeIcon} alt="Menu"/>
   				  </div>
-
-  				  <div className="right menu">
-              <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  padding: '0 2rem',
-                  color: 'white',
-                }}>
-                Logged in as { admin ? 'Admin' : 'Student' }
-              </div>
-  		        <Button onClick={this.handleClick}>
-                Login as { admin ? 'Student' : 'Admin' }
-              </Button>
+            <div style={{ color: type !== 'alt' ? 'white' : 'inherit'}} className="self-align-center">
+              SERVICE LEARNING TIME TRACKER
+            </div>
+  				  <div style={{ padding: '1rem 0' }} className="right menu">
+              <Icon onClick={() => dispatch(push('/settings'))} color='#fff' inverted={type !== 'alt'} link size="big" name="setting" />
   				  </div>
   				</div>
         </div>
@@ -106,7 +98,9 @@ class Wrapper extends Component {
         {navToggled ? <Sidebar navToggled={navToggled} location={location} items={MenuItems} /> : null}
         <div onClick={() => dispatch({ type: 'SET_NAVBAR', payload: false })} className={classNav}>
 				  {this.renderNavbar()}
-          {children}
+          <div style={{paddingBottom: '5rem'}}>
+            {children}
+          </div>
         </div>
         <Modal />
 			</div>
