@@ -35,7 +35,7 @@ class EnterTime extends Component {
         {'value': 'group', 'text': 'Group Research and Planning'},
         {'value': 'individual', 'text': 'Individual Research and Planning'},
         {'value': 'training', 'text': 'Training and Orientation'}
-      ]
+      ],
       defaultProjectTypes: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
     }
   }
@@ -76,11 +76,7 @@ class EnterTime extends Component {
               <br/>
               <div className="field">
                 <label>Project</label>
-<<<<<<< HEAD
-                <Dropdown placeholder='Select Project' fluid selection options={EnterTime.courseToProjects['CS 4500']} />
-=======
                 <Dropdown defaultValue={selectedProject} placeholder='Select Project' fluid selection options={defaultProjectTypes} />
->>>>>>> master
               </div>
               <br/>
               <div className="three fields">
