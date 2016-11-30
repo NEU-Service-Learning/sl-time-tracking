@@ -32,6 +32,11 @@ class Wrapper extends Component {
       routes: ['/classes'],
     },
     {
+      label: 'Register for Classes',
+      navbarTypes: [''],
+      routes: ['/classes/add'],
+    },
+    {
       label: 'Settings',
       navbarTypes: ['alt'],
       routes: ['/settings'],

@@ -8,6 +8,7 @@ import EnterTime from './pages/EnterTime/EnterTime'
 import Settings from './pages/Settings/Settings'
 import Wrapper from './components/Wrapper'
 import Classes from './pages/Classes/Classes'
+import AddClasses from './pages/Classes/AddClasses'
 import Admin from './pages/Admin/Admin'
 
 import configureStore from './redux/store'
@@ -21,6 +22,7 @@ const paths = {
   ADMIN: '/admin',
   SETTINGS: '/settings',
   CLASSES: '/classes',
+  ADD_CLASSES: '/classes/add',
 };
 
 const getRoutes = getState => {
@@ -45,6 +47,10 @@ const getRoutes = getState => {
       {
         path: paths.SETTINGS,
         component: Settings,
+      },
+      {
+        path: paths.ADD_CLASSES,
+        component: AddClasses,
       },
       {
         path: paths.CLASSES,

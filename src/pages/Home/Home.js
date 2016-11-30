@@ -28,7 +28,7 @@ class Home extends Component {
   }
 
   static defaultProps = {
-    classes: [{ name: 'Class A' }, { name: 'Class B' }],
+    classes: [{ name: 'CS 4500: Software Development' }, { name: 'ANTH 5513: Ancient Greek History' }],
     services: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research'}, {'value': 'individual', 'text': 'Individual Research'}, {'value': 'training', 'text': 'Training'}],
     projects: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
   }

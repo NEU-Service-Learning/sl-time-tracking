@@ -9,7 +9,6 @@ import { Header, Divider, Card, Image, Dropdown } from 'semantic-ui-react'
 import { STUDENT_EDIT_TIME } from '../../redux/actions/action-types'
 import TimeInput from '../../components/TimeInput'
 
-
 class EnterTime extends Component {
   static propTypes = {
     loading: PropTypes.bool,
@@ -17,11 +16,26 @@ class EnterTime extends Component {
     time: PropTypes.object,
     dispatch: PropTypes.func,
   }
+
+  static courseToProjects = {
+    'CS 4500': [{'value': 'direct', 'text': 'Service Learning'},
+      {'value': 'direct', 'text': 'Good For Society'},
+      {'value': 'direct', 'text': 'Help Save Kids'}],
+    'PT 1234': [{'value': 'direct', 'text': 'Train Athletes to Win'},
+        {'value': 'direct', 'text': 'Soup Kitchen'},
+        {'value': 'direct', 'text': 'God is Good'}],
+  }
+
   constructor (props) {
     super(props)
     this.state = {
       warning: '',
-      defaultServiceTypes: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research'}, {'value': 'individual', 'text': 'Individual Research'}, {'value': 'training', 'text': 'Training'}],
+      defaultServiceTypes: [
+        {'value': 'direct', 'text': 'Direct Service'},
+        {'value': 'group', 'text': 'Group Research and Planning'},
+        {'value': 'individual', 'text': 'Individual Research and Planning'},
+        {'value': 'training', 'text': 'Training and Orientation'}
+      ]
       defaultProjectTypes: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
     }
   }
@@ -62,7 +76,11 @@ class EnterTime extends Component {
               <br/>
               <div className="field">
                 <label>Project</label>
+<<<<<<< HEAD
+                <Dropdown placeholder='Select Project' fluid selection options={EnterTime.courseToProjects['CS 4500']} />
+=======
                 <Dropdown defaultValue={selectedProject} placeholder='Select Project' fluid selection options={defaultProjectTypes} />
+>>>>>>> master
               </div>
               <br/>
               <div className="three fields">
