@@ -115,13 +115,13 @@ class Home extends Component {
           <div className="home-text">
             <div>
               <span>
-                I served for
+                I completed
               </span>
               <select defaultValue={selectedService} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedService: e.target.value }})} name='selectedService' className="home-dropdown">
                 {services.map(item => (<option key={item.value} value={item.value}>{item.text}</option>))}
               </select>
               <span>
-                working on
+               working on
               </span>
               <select defaultValue={selectedProject} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedProject: e.target.value }})} name='selectedProject' className="home-dropdown">
                 {projects.map(item => (<option key={item.value} value={item.value}>{item.text}</option>))}
