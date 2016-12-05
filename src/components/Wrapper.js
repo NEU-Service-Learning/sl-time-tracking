@@ -76,7 +76,7 @@ class Wrapper extends Component {
                 }} className="nav-icon" src={!navToggled ? menuIcon : closeIcon} alt="Menu"/>
   				  </div>
             <div style={{ color: type !== 'alt' ? 'white' : 'inherit'}} className="self-align-center">
-              SERVICE LEARNING TIME TRACKER
+              SERVICE-LEARNING TIME TRACKER
             </div>
   				  <div style={{ padding: '1rem 0' }} className="right menu">
               <Icon onClick={() => dispatch(push('/settings'))} color='#fff' inverted={type !== 'alt'} link size="big" name="setting" />
