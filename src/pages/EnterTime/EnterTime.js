@@ -141,7 +141,7 @@ class EnterTime extends Component {
                 <Header.Content>
                   Additional Group Members
                   <Header.Subheader>
-                    Anyone else that served
+                    Anyone else who served
                   </Header.Subheader>
                 </Header.Content>
               </Header>
