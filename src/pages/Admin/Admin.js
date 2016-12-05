@@ -85,7 +85,7 @@ class Admin extends Component {
             </Header>
           </Table.Cell>
           <Table.Cell>
-            Time Tracking
+            Time Tracking - Service Learning Program
           </Table.Cell>
           <Table.Cell>
             22
@@ -103,7 +103,7 @@ class Admin extends Component {
             </Header>
           </Table.Cell>
           <Table.Cell>
-            Time Tracking
+            Time Tracking - Service Learning Program
           </Table.Cell>
           <Table.Cell>
             15
@@ -121,7 +121,7 @@ class Admin extends Component {
             </Header>
           </Table.Cell>
           <Table.Cell>
-            Time Tracking
+            Time Tracking - Service Learning Program
           </Table.Cell>
           <Table.Cell>
             12
@@ -139,7 +139,7 @@ class Admin extends Component {
             </Header>
           </Table.Cell>
           <Table.Cell>
-            Time Tracking
+            Time Tracking - Service Learning Program
           </Table.Cell>
           <Table.Cell>
             11
