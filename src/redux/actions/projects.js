@@ -1,6 +1,6 @@
 import { GET } from '../api'
 
-export const getProjects = (id) => dispatch => {
+export const getProjects = () => dispatch => {
   dispatch({ type: 'PROJECTS_LOADING' })
   GET(`/projects/`)
   .then(data => dispatch({ type: 'PROJECTS_SUCCESS', payload: data }))

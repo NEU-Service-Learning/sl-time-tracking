@@ -1,6 +1,7 @@
 const defaultState = {
   loading: false,
   error: null,
+  sections: [],
   courses: [],
 }
 export function courseReducer (state = defaultState, { type, payload }) {
@@ -9,6 +10,12 @@ export function courseReducer (state = defaultState, { type, payload }) {
       return {
         ...state,
         loading: true,
+      }
+    }
+    case 'COURSES_SECTIONS_SUCCESS': {
+      return {
+        ...state,
+        sections: payload,
       }
     }
     case 'COURSES_SUCCESS': {
