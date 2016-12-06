@@ -18,7 +18,7 @@ const request = (endpoint, data, moreHeaders, method) => {
     .then(blob => {
       const { status } = blob
       const data = blob.json()
-      if (status === 200) {
+      if (status === 200 || status === 201) {
         return data
       }
       throw data
