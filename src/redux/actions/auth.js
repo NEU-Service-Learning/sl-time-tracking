@@ -12,7 +12,13 @@ export const loginUser = (login) => {
       dispatch(getMyInfo())
       return dispatch({ type: 'LOGIN_SUCCESS', payload: key.key })
     })
-    .catch(error => error.then(data => dispatch({ type: 'LOGIN_ERROR', payload: data })))
+    .catch(error => {
+      if (Promise.resolve(error) === error) {
+        return error.then(data => dispatch({ type: 'LOGIN_ERROR', payload: data }))
+      } else {
+        return error
+      }
+    })
   }
 }
 
