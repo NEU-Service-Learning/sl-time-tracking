@@ -131,19 +131,11 @@ class Home extends Component {
           <div className="home-text">
             <div>
               <span>
-<<<<<<< HEAD
-                I served
-=======
                 I completed
->>>>>>> 5965a230651ee48650e596501ad1c3deb6752463
               </span>
               <input onChange={(e) => this.editHours(e.target.value)} type='number' value={time.hours} placeholder='Hours...' />
               <span>
-<<<<<<< HEAD
                 hour{parseInt(time.hours) === 1 ? '' : 's'} for
-=======
-               working on
->>>>>>> 5965a230651ee48650e596501ad1c3deb6752463
               </span>
               <select defaultValue={selectedEnrollment} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedEnrollment: e.target.value }})} name='selectedCourse' className="home-dropdown">
                 {Object.keys(enrollments).map(key => (<option key={key} value={key}>{enrollments[key].course}</option>))}
