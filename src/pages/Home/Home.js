@@ -4,11 +4,14 @@ import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { push } from 'react-router-redux'
+import { Input, Dimmer, Loader, Message } from 'semantic-ui-react'
 
 import './Home.css'
 import Button from '../../components/Button'
 import Timeline from '../../components/Timeline'
 import TimeInput from '../../components/TimeInput'
+import { getCourses } from '../../redux/actions/courses'
+import { getProjects } from '../../redux/actions/projects'
 
 import { STUDENT_EDIT_TIME } from '../../redux/actions/action-types'
 const date = moment(new Date())
@@ -23,8 +26,9 @@ class Home extends Component {
     error: PropTypes.string,
     time: PropTypes.object,
     dispatch: PropTypes.func,
+    courses: PropTypes.object,
     services: PropTypes.array,
-    projects: PropTypes.array,
+    user: PropTypes.object,
   }
 
   static defaultProps = {
@@ -47,6 +51,13 @@ class Home extends Component {
   handleEndChange (type, val) {
     const { dispatch } = this.props
     dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { [type] : val }}})
+  }
+
+  editHours = (hours) => {
+    const { dispatch } = this.props
+    if (hours > 0) {
+      dispatch({ type: STUDENT_EDIT_TIME, payload: { hours }})
+    }
   }
 
   renderStats() {
@@ -82,13 +93,14 @@ class Home extends Component {
   }
 
   renderBottom() {
-    const { classes } = this.props
+    const { courses, user } = this.props
+    const { enrollments } = user
     return (
       <div className="home-bottom">
         <div className="ui container">
           <div className="home-filter-container">
             <h4 className="ui grey header">Filters</h4>
-            {classes.map((item, index) => (<div key={index} className="home-filter">{item.name}</div>))}
+            {Object.keys(enrollments).map(key => (<div key={key} className="home-filter">{enrollments[key].course}</div>))}
           </div>
           <div className="home-timeline-container">
             <h3 className="ui dividing header home-header">Timeline</h3>
@@ -107,29 +119,31 @@ class Home extends Component {
   }
 
 	render () {
-    const { classes, time, dispatch, services, projects } = this.props
-    const { fromReset, toReset, start, end, selectedService, selectedProject } = time
+    const { time, dispatch, loading, user } = this.props
+    const { enrollments } = user
+    const { fromReset, toReset, start, end, selectedService, selectedProject, selectedCourse, selectedEnrollment } = time
 		return (
       <div>
+        <Dimmer active={loading}>
+          <Loader />
+        </Dimmer>
         <div className="home-container">
           <div className="home-text">
             <div>
               <span>
-                I served for
+                I served
               </span>
-              <select defaultValue={selectedService} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedService: e.target.value }})} name='selectedService' className="home-dropdown">
-                {services.map(item => (<option key={item.value} value={item.value}>{item.text}</option>))}
-              </select>
+              <input onChange={(e) => this.editHours(e.target.value)} type='number' value={time.hours} placeholder='Hours...' />
               <span>
-                working on
+                hour{parseInt(time.hours) === 1 ? '' : 's'} for
               </span>
-              <select defaultValue={selectedProject} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedProject: e.target.value }})} name='selectedProject' className="home-dropdown">
-                {projects.map(item => (<option key={item.value} value={item.value}>{item.text}</option>))}
+              <select defaultValue={selectedEnrollment} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedEnrollment: e.target.value }})} name='selectedCourse' className="home-dropdown">
+                {Object.keys(enrollments).map(key => (<option key={key} value={key}>{enrollments[key].course}</option>))}
               </select>
             </div>
             <div>
               <span>
-                from
+                on
               </span>
               <TimeInput
                 hours={start.hours}
@@ -151,31 +165,8 @@ class Home extends Component {
                 onChange={(date) => dispatch({ type: STUDENT_EDIT_TIME, payload: { start: { ...start, date }}})}
                 />
             </div>
-            <div>
-              <span>
-                to
-              </span>
-              <TimeInput
-                hours={end.hours}
-                minutes={end.minutes}
-                onChange={(data) => dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { ...end, ...data }}})}
-              />
-              <select
-                defaultValue={end.period} onChange={(period) => dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { ...end, period }}})}
-                className="home-dropdown"
-              >
-                <option value="am">AM</option>
-                <option value="pm">PM</option>
-              </select>
-              <span>
-                on
-              </span>
-              <DatePicker
-                selected={end.date}
-                onChange={(date) => dispatch({ type: STUDENT_EDIT_TIME, payload: { end: { ...end, date }}})}
-                />
-            </div>
           </div>
+          <br/>
           <div className="ui large buttons">
             <Button onClick={this.onClickSubmit} className="ui button home-button">
               Submit Time
@@ -190,6 +181,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state.student
+  ...state.student,
+  user: state.auth.user,
+  loading: state.courses.loading || state.projects.loading,
 })
 export default connect(mapStateToProps)(Home)
