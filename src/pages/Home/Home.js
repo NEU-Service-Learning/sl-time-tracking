@@ -32,7 +32,7 @@ class Home extends Component {
   }
 
   static defaultProps = {
-    classes: [{ name: 'Class A' }, { name: 'Class B' }],
+    classes: [{ name: 'CS 4500: Software Development' }, { name: 'ANTH 5513: Ancient Greek History' }],
     services: [{'value': 'direct', 'text': 'Direct Service'}, {'value': 'group', 'text': 'Group Research'}, {'value': 'individual', 'text': 'Individual Research'}, {'value': 'training', 'text': 'Training'}],
     projects: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
   }
@@ -131,11 +131,19 @@ class Home extends Component {
           <div className="home-text">
             <div>
               <span>
+<<<<<<< HEAD
                 I served
+=======
+                I completed
+>>>>>>> 5965a230651ee48650e596501ad1c3deb6752463
               </span>
               <input onChange={(e) => this.editHours(e.target.value)} type='number' value={time.hours} placeholder='Hours...' />
               <span>
+<<<<<<< HEAD
                 hour{parseInt(time.hours) === 1 ? '' : 's'} for
+=======
+               working on
+>>>>>>> 5965a230651ee48650e596501ad1c3deb6752463
               </span>
               <select defaultValue={selectedEnrollment} onChange={(e) => dispatch({ type: 'STUDENT_EDIT_TIME', payload: { selectedEnrollment: e.target.value }})} name='selectedCourse' className="home-dropdown">
                 {Object.keys(enrollments).map(key => (<option key={key} value={key}>{enrollments[key].course}</option>))}

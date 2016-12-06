@@ -8,10 +8,13 @@ import { Form, TextArea, Input, Dimmer, Loader, Header, Divider, Card, Image, Dr
 
 import { STUDENT_EDIT_TIME } from '../../redux/actions/action-types'
 import TimeInput from '../../components/TimeInput'
+<<<<<<< HEAD
 import { getCourses } from '../../redux/actions/courses'
 import { addRecord } from '../../redux/actions/record'
 import { getEnrollmentsForCourse } from '../../redux/actions/enrollments'
 import { getProjects, getStudentsOnProject } from '../../redux/actions/projects'
+=======
+>>>>>>> 5965a230651ee48650e596501ad1c3deb6752463
 
 class EnterTime extends Component {
   static propTypes = {
@@ -24,12 +27,31 @@ class EnterTime extends Component {
     user: PropTypes.object,
     projects: PropTypes.object,
   }
+
+  static courseToProjects = {
+    'CS 4500': [{'value': 'direct', 'text': 'Service Learning'},
+      {'value': 'direct', 'text': 'Good For Society'},
+      {'value': 'direct', 'text': 'Help Save Kids'}],
+    'PT 1234': [{'value': 'direct', 'text': 'Train Athletes to Win'},
+        {'value': 'direct', 'text': 'Soup Kitchen'},
+        {'value': 'direct', 'text': 'God is Good'}],
+  }
+
   constructor (props) {
     super(props)
     this.state = {
       warning: '',
+<<<<<<< HEAD
       loadingLocation: false,
       defaultServiceTypes: [{ value: 'TO', text: 'Trainings & Orientations' }, { value: 'DS', text: 'Direct Service' }, { value: 'IR', text: 'Individual Research & Planning' }, { value: 'TR', text: 'Team Research & Planning' }],
+=======
+      defaultServiceTypes: [
+        {'value': 'direct', 'text': 'Direct Service'},
+        {'value': 'group', 'text': 'Group Research and Planning'},
+        {'value': 'individual', 'text': 'Individual Research and Planning'},
+        {'value': 'training', 'text': 'Training and Orientation'}
+      ],
+>>>>>>> 5965a230651ee48650e596501ad1c3deb6752463
       defaultProjectTypes: [{'value': 'direct', 'text': 'Project A'}, {'value': 'group', 'text': 'Project B'}, {'value': 'individual', 'text': 'Project C'}],
     }
   }
@@ -210,7 +232,7 @@ class EnterTime extends Component {
                 <Header.Content>
                   Additional Group Members
                   <Header.Subheader>
-                    Anyone else that served
+                    Anyone else who served
                   </Header.Subheader>
                 </Header.Content>
               </Header>
