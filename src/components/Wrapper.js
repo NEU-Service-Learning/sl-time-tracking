@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Icon, Button } from 'semantic-ui-react'
 import { push } from 'react-router-redux'
 
+import { getMyInfo } from '../redux/actions/student'
 import Sidebar from './Sidebar'
 import MenuIcon from '../img/menu.svg'
 import MenuIconAlt from '../img/menu-alt.svg'
@@ -17,6 +18,7 @@ class Wrapper extends Component {
   static propTypes = {
     admin: PropTypes.bool,
     dispatch: PropTypes.func,
+    loggedIn: PropTypes.bool,
     navToggled: PropTypes.bool,
   }
 
@@ -48,13 +50,28 @@ class Wrapper extends Component {
     },
   ]
 
+  componentWillMount() {
+    if (!this.props.loggedIn) {
+      this.props.dispatch(push('/login'))
+    } else {
+      this.props.dispatch(getMyInfo())
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if (this.props.loggedIn !== props.loggedIn && props.loggedIn) {
+      this.props.dispatch(push('/'))
+      this.props.dispatch(getMyInfo())
+    }
+  }
+
   handleClick = () => {
     const { dispatch, admin } = this.props
     dispatch({ type: 'SET_ADMIN', payload: !admin })
   }
 
 	renderNavbar() {
-    const { navToggled, dispatch, location } = this.props
+    const { navToggled, dispatch, location, loggedIn } = this.props
     const { pathname } = location
     let type = ''
     Wrapper.MenuItems.forEach(item => {
@@ -65,6 +82,9 @@ class Wrapper extends Component {
     })
     const menuIcon = type === 'alt' ? MenuIconAlt : MenuIcon
     const closeIcon = type === 'alt' ? MenuCloseIconAlt : MenuCloseIcon
+    if (!loggedIn) {
+      return null
+    }
 		return (
       <div className={type === 'alt' ? 'nav-white' : 'nav-purple'}>
   			<div style={{ padding: '2rem 0' }} className="ui container">
@@ -91,7 +111,6 @@ class Wrapper extends Component {
 	render () {
 		const { children, navToggled, location, dispatch} = this.props
     const { MenuItems } = Wrapper
-
     const classNav = navToggled ? 'nav-open' : 'nav-closed'
 		return (
 			<div>

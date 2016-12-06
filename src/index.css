@@ -22,6 +22,12 @@ body {
   animation: app-animation 0.1s ease-out;
 }
 
+
+.input-left-fix {
+  left: 7px !important;
+  position: relative;
+}
+
 @keyframes app-animation {
     0%   {
       transform: translate(300px, 0);

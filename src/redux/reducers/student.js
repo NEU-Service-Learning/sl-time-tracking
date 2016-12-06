@@ -13,11 +13,21 @@ const prevDate = moment(new Date()).subtract(1, 'hours')
 const defaultState = {
   loading: false,
   error: null,
+  success: false,
   firstName: '',
   lastName: '',
+  record: {
+    loading: false,
+    error: {},
+    data: null,
+  },
   time: {
+    comments: '',
     selectedService: '',
     selectedProject: '',
+    selectedType: '',
+    selectedCourse: '',
+    selectedEnrollment: '',
     start: {
       hours: prevDate.format('hh'),
       minutes: prevDate.format('mm'),
@@ -30,6 +40,7 @@ const defaultState = {
       period: date.format('a'),
       date: moment(),
     },
+    hours: 0,
     toReset: date.format('h:mm'),
     fromReset: prevDate.format('h:mm'),
   },
@@ -46,6 +57,12 @@ export function studentReducer (state = defaultState, { type, payload }) {
         },
       }
     }
+    case 'STUDENT_RESET_SUCCESS': {
+      return {
+        ...state,
+        success: false,
+      }
+    }
     // Loading when you click add time
     case STUDENT_ADD_TIME_LOADING: {
       return {
@@ -59,6 +76,7 @@ export function studentReducer (state = defaultState, { type, payload }) {
       return {
         ...state,
         loading: true,
+        success: true,
         error: null,
       }
     }
@@ -68,6 +86,38 @@ export function studentReducer (state = defaultState, { type, payload }) {
         ...state,
         loading: true,
         error: null,
+      }
+    }
+    case 'RECORD_LOADING': {
+      return {
+        ...state,
+        record: {
+          ...state.record,
+          loading: true,
+          error: {},
+        }
+      }
+    }
+    case 'RECORD_SUCCESS': {
+      console.log('success');
+      return {
+        ...state,
+        success:  true,
+        record: {
+          loading: false,
+          error: {},
+          data: payload,
+        }
+      }
+    }
+    case 'RECORD_ERROR': {
+      return {
+        ...state,
+        record: {
+          ...state.record,
+          loading: false,
+          error: payload,
+        }
       }
     }
     default: {

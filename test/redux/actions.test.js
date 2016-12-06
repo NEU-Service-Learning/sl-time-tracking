@@ -22,6 +22,7 @@ describe('Student actions', () => {
         expect(store.getActions()).toEqual(expectedActions)
       })
   })
+  
 
   it('succesfully dispatches STUDENT_ADD_TIME_ERROR', () => {
     const expectedActions = [

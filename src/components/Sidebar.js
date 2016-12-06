@@ -1,7 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
+import { Icon } from 'semantic-ui-react'
 
+import { logoutUser } from '../redux/actions/auth'
 import './Sidebar.css'
 
 class Sidebar extends Component {
@@ -13,6 +15,7 @@ class Sidebar extends Component {
     onToggle: PropTypes.func,
     dispatch: PropTypes.func,
     location: PropTypes.object,
+    loggedIn: PropTypes.bool,
     navToggled: PropTypes.bool,
   }
 
@@ -43,13 +46,21 @@ class Sidebar extends Component {
     })
   }
   render() {
+    const { loggedIn, dispatch } = this.props
+
+    if (!loggedIn) {
+      return null
+    }
     return (
       <div className="app-sidebar">
         <div className="app-sidebar-avatar">
-          <img alt="Kosi" src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/12246688_10207707866513040_7752400638614787415_n.jpg?oh=b63af0c1094c390206628b92820980d9&oe=589E71DB" />
+          <Icon name='user' />
         </div>
         {this.renderItems()}
-        <a className="app-logout">
+        <a onClick={() => {
+            dispatch(logoutUser())
+            dispatch({ type: 'SET_NAVBAR', payload: false })
+          }} className="app-logout">
           Log Out
         </a>
       </div>
@@ -57,4 +68,6 @@ class Sidebar extends Component {
   }
 }
 
-export default connect()(Sidebar)
+const mapStateToProps = (state) => ({...state.auth})
+
+export default connect(mapStateToProps)(Sidebar)
