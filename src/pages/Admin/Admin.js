@@ -170,7 +170,7 @@ class Admin extends Component {
                </Header>
                <Item.Description>{item.description}</Item.Description>
                <Item.Extra>
-                 <Button size='small' onClick={() => this.setState({ selectedClass: item })} content='Edit' />
+                 <Button size='small' onClick={() => this.setState({ selectedClass: item })} content='Class Details' />
                  <Button.Group style={{ float: 'right' }} basic size='small'>
                     <Button content='Remove' icon='trash outline' />
                     <Button content='Duplicate' icon='clone' />
