@@ -6,7 +6,12 @@ const defaultState = {
   error: {},
   loggedIn: !!auth,
   token: auth,
-  user: { enrollments: {}},
+  user: {
+    enrollments: {},
+    first_name: '',
+    last_name: '',
+    username: '',
+  },
 }
 
 export function authReducer (state = defaultState, { type, payload }) {
