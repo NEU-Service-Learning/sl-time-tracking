@@ -1,6 +1,9 @@
 const defaultState = {
   loading: false,
   error: null,
+  enrollmentsLoading: false,
+  enrollmentsError: {},
+  enrollmentsSuccess: false,
   studentsError: null,
   studentsLoading: false,
   projects: [],
@@ -12,6 +15,30 @@ export function projectsReducer (state = defaultState, { type, payload }) {
       return {
         ...state,
         loading: true,
+      }
+    }
+    case 'ENROLLMENTS_ADD_LOADING': {
+      return {
+        ...state,
+        enrollmentsSuccess: false,
+        enrollmentsError: {},
+        enrollmentsLoading: true,
+      }
+    }
+    case 'ENROLLMENTS_ADD_ERROR': {
+      return {
+        ...state,
+        enrollmentsSuccess: false,
+        enrollmentsError: payload,
+        enrollmentsLoading: false,
+      }
+    }
+    case 'ENROLLMENTS_ADD_SUCCESS': {
+      return {
+        ...state,
+        enrollmentsSuccess: true,
+        enrollmentsError: {},
+        enrollmentsLoading: false,
       }
     }
     case 'PROJECTS_STUDENTS_LOADING': {

@@ -154,7 +154,7 @@ class EnterTime extends Component {
                 <Form.Field>
                   <Form.Dropdown label='Course' onChange={(e, val) => {
                       dispatch({ type: STUDENT_EDIT_TIME, payload: { selectedEnrollment: val.value }})
-                    }} defaultValue={selectedEnrollment} placeholder='Select Course' fluid selection options={Object.keys(enrollments).map(key => ({ value: key, text: enrollments[key].course }))} />
+                    }} defaultValue={selectedEnrollment} placeholder='Select Course' fluid selection options={Object.keys(enrollments).map(key => ({ value: enrollments[key].id, text: enrollments[key].course }))} />
                 </Form.Field>
                 <Form.Field>
                   <Form.Dropdown label='Project' onChange={(e, val) => {
