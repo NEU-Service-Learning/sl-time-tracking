@@ -62,7 +62,7 @@ class Home extends Component {
 
   renderStats() {
     return (
-      <div className="home-stats-container">
+      <div className="home-stats-container container">
         <div className="home-stats-header">
           <span>Total Time</span>
           <span>
@@ -104,7 +104,7 @@ class Home extends Component {
           </div>
           <div className="home-timeline-container">
             <h3 className="ui dividing header home-header">Timeline</h3>
-            <div className="ui grid">
+            <div className="ui stackable two column grid">
               <div className="ten wide column">
                 <Timeline />
               </div>
