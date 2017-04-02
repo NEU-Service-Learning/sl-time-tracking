@@ -1,11 +1,14 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Checkbox, TextArea, Table, Form, Modal, Divider, Icon, Extra, Container, Header, Grid, Content, Button,  Input, Menu, Segment, Card, Group, Item, Image, Description} from 'semantic-ui-react'
+import { getUsersInfo } from '../../redux/actions/admin'
 
 class Admin extends Component {
   static propTypes = {
     classes: PropTypes.array,
+    users: PropTypes.array,
   }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -16,8 +19,16 @@ class Admin extends Component {
       classEditing: true,
     }
   }
-
+  
+  componentWillMount() {
+    const { dispatch } = this.props
+    dispatch(getUsersInfo())
+  }
+  
   renderStudents() {
+    const { users } = this.props
+    console.log(users);
+	  
     return (
       <Item.Group>
         <Button onClick={() => this.setState({ modalStudent: true })} fluid content='Add Student' basic icon='add user' />
@@ -295,6 +306,11 @@ class Admin extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ ...state.class })
+const mapStateToProps = (state) => {
+	return {
+	  classes: state.class.classes,
+	  users: state.admin.users
+	}
+}
 
 export default connect(mapStateToProps)(Admin)
