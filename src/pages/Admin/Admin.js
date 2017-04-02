@@ -2,8 +2,21 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Checkbox, TextArea, Table, Form, Modal, Divider, Icon, Extra, Container, Header, Grid, Content, Button,  Input, Menu, Segment, Card, Group, Item, Image, Description} from 'semantic-ui-react'
 import { getUsersInfo } from '../../redux/actions/admin'
+import ReactDataGrid from 'react-data-grid';
+
+const columns = [
+    { key: 'id', name: 'ID',filterable: true, sortable: true ,width: 40,resizeable :true},
+    { key: 'first_name', name: 'First Name' ,filterable: true, sortable: true},
+    { key: 'last_name', name: 'Last Name' ,filterable: true, sortable: true},
+    { key: 'role', name: 'Role' },
+    { key: 'courses', name: 'Course' },
+    { key: 'enrollment', name: 'Enrollment' }];
 
 class Admin extends Component {
+    getInitialState(){
+
+    }
+
   static propTypes = {
     classes: PropTypes.array,
     users: PropTypes.array,
@@ -24,38 +37,74 @@ class Admin extends Component {
     const { dispatch } = this.props
     dispatch(getUsersInfo())
   }
-  
+
+    handleGridSort(sortColumn, sortDirection) {
+    }
+    handleFilterChange(filter) {
+        let newFilters = Object.assign({}, this.state.filters);
+        if (filter.filterTerm) {
+            newFilters[filter.column.key] = filter;
+        } else {
+            delete newFilters[filter.column.key];
+        }
+
+        this.setState({ filters: newFilters });
+    }
+
+    onClearFilters() {
+        this.setState({ filters: {} });
+    }
+
+  renderStudent(user){
+    const rowGetter = rowNumber => user[rowNumber];
+    console.log(user);
+    return (
+       <ReactDataGrid
+           onGridSort={this.handleGridSort}
+           columns={columns}
+           rowGetter={rowGetter}
+           rowsCount={user.length}
+           minHeight={500}
+           //toolbar={<Toolbar enableFilter={true}/>}
+           onAddFilter={this.handleFilterChange}
+           onClearFilters={this.onClearFilters}
+       />);
+      // <Card>
+      //   <Card.Content>
+      //     <Card.Header>{user.first_name}{user.last_name}</Card.Header>
+      //     <Card.Meta>{user.courses}</Card.Meta>
+      //     <Card.Description>{user.role}</Card.Description>
+      //   </Card.Content>
+      //   <Card.Content extra>
+      //     <Button fluid basic >Edit</Button>
+      //   </Card.Content>
+      // </Card>
+
+  }
+
   renderStudents() {
-    const { users } = this.props
+    const { users } = this.props;
+
+
     console.log(users);
-	  
+    console.log( users.length);
+
+	// var listofstudents= []
+     //  for (var i = 0; i < users.length; i++) {
+    //
+     //      var key =users[i];
+     //      listofstudents.push(this.renderStudent(key));
+     //  }
     return (
       <Item.Group>
         <Button onClick={() => this.setState({ modalStudent: true })} fluid content='Add Student' basic icon='add user' />
         <Divider hidden />
-        <Card.Group>
-          <Card>
-            <Card.Content>
-              <Card.Header>Matthew Harris</Card.Header>
-              <Card.Meta>Co-Worker</Card.Meta>
-              <Card.Description>Matthew is a pianist living in Nashville.</Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-                <Button fluid basic >Edit</Button>
-            </Card.Content>
-          </Card>
 
-          <Card>
-            <Card.Content>
-              <Card.Header content='Jake Smith' />
-              <Card.Meta content='Musicians' />
-              <Card.Description content='Jake is a drummer living in New York.' />
-            </Card.Content>
-            <Card.Content extra>
-                <Button fluid basic >Edit</Button>
-            </Card.Content>
-          </Card>
-        </Card.Group>
+        <div>
+            {this.renderStudent(users)}
+
+
+        </div>
       </Item.Group>
     )
   }
