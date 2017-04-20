@@ -1,5 +1,7 @@
 ![](https://travis-ci.org/deadlocked247/sl-time-tracking.svg?branch=master)
 
+Jack's edit
+
 ## Installing sl-time-tracking
 - Go to the root directory
 - Run `npm install`
