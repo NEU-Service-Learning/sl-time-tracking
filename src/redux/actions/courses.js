@@ -10,3 +10,5 @@ export const getCourseSections = (id) => dispatch => {
   GET(`/course/${id}/sections/`)
   .then(data => dispatch({ type: 'COURSES_SECTIONS_SUCCESS', payload: data }))
 }
+
+

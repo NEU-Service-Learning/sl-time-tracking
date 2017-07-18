@@ -5,7 +5,7 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
-const baseURL = 'http://ec2-54-147-212-27.compute-1.amazonaws.com'
+const baseURL = 'http://localhost:8000'
 
 const request = (endpoint, data, moreHeaders, method) => {
   const token = localStorage.getItem('key')

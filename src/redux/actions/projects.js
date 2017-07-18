@@ -12,3 +12,11 @@ export const getStudentsOnProject = (id) => dispatch => {
   .then(data => dispatch({ type: 'PROJECTS_STUDENTS_SUCCESS', payload: data }))
   .catch(err => dispatch({ type: 'PROJECTS_STUDENTS_ERROR', payload: err }))
 }
+
+
+export const getCP = (id) => dispatch => {
+    dispatch({ type: 'PROJECTS_LOADING' })
+    GET(`/communityPartner/${id}`)
+        .then(data => dispatch({ type: 'PROJECTS_SUCCESS', payload: data }))
+        .catch(err => dispatch({ type: 'PROJECTS_ERROR', payload: err }))
+}

@@ -2,14 +2,21 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Checkbox, TextArea, Table, Form, Modal, Divider, Icon, Extra, Container, Header, Grid, Content, Button,  Input, Menu, Segment, Card, Group, Item, Image, Description} from 'semantic-ui-react'
 import { getUsersInfo } from '../../redux/actions/admin'
-import ReactDataGrid from 'react-data-grid';
+import { getProjects,getCP } from '../../redux/actions/projects'
+import { getCourses } from '../../redux/actions/courses'
+//import ReactDataGrid from 'react-data-grid';
+var FixedDataTable = require('fixed-data-table');
+
+var RTable = FixedDataTable.Table;
 
 const columns = [
     { key: 'id', name: 'ID',filterable: true, sortable: true ,width: 40,resizeable :true},
     { key: 'first_name', name: 'First Name' ,filterable: true, sortable: true},
     { key: 'last_name', name: 'Last Name' ,filterable: true, sortable: true},
     { key: 'role', name: 'Role' },
-    { key: 'courses', name: 'Course' },
+    { key: 'course', name: 'Course' },
+    { key: 'semester', name: 'semester' },
+    { key: 'cp', name: 'Community Partner' },
     { key: 'enrollment', name: 'Enrollment' }];
 
 class Admin extends Component {
@@ -20,6 +27,8 @@ class Admin extends Component {
   static propTypes = {
     classes: PropTypes.array,
     users: PropTypes.array,
+      projects: PropTypes.object,
+
   }
 
   constructor(props) {
@@ -30,78 +39,109 @@ class Admin extends Component {
       modalStudent: false,
       selectedClass: false,
       classEditing: true,
+      filtertext: "Ram" ,
+      filtertag: "courses",
     }
   }
   
   componentWillMount() {
     const { dispatch } = this.props
     dispatch(getUsersInfo())
+      dispatch(getProjects())
+      dispatch(getCourses())
+
   }
 
-    handleGridSort(sortColumn, sortDirection) {
+
+    handleChange = (id) => {
+
+        this.props.dispatch(getCP(id))
     }
-    handleFilterChange(filter) {
-        let newFilters = Object.assign({}, this.state.filters);
-        if (filter.filterTerm) {
-            newFilters[filter.column.key] = filter;
-        } else {
-            delete newFilters[filter.column.key];
+
+    resolveprojectCP(id, pj){
+
+        if (id["0"]){
+            return pj[id-1]["community_partner"];
         }
+        return "None";
 
-        this.setState({ filters: newFilters });
     }
+    resolveproject(id, pj){
 
-    onClearFilters() {
-        this.setState({ filters: {} });
+      if (id["0"]){
+          return pj[id-1]["name"];
+      }
+        return "None";
+
     }
-
-  renderStudent(user){
+  renderStudent(user,project){
     const rowGetter = rowNumber => user[rowNumber];
-    console.log(user);
+   // console.log(project[0].name);
+      var listofstudents= []
+      for (var i = 0; i < user.length; i++) {
+
+          var key =user[i];
+
+          if (key[this.state.filtertag].includes(this.state.filtertext)){
+              listofstudents.push(
+                  <Table.Row>
+                    <Table.Cell>
+                      {key.id}
+                    </Table.Cell>
+                    <Table.Cell>{key.first_name}</Table.Cell>
+                    <Table.Cell>{key.last_name}</Table.Cell>
+                    <Table.Cell textAlign='left'>{key.role}</Table.Cell>
+                    <Table.Cell>{key.courses}</Table.Cell>
+                    <Table.Cell>{key.sections}</Table.Cell>
+                    <Table.Cell>{this.resolveproject(key.projects, project)}</Table.Cell>
+                    <Table.Cell>{this.resolveprojectCP(key.projects, project)}</Table.Cell>
+                  </Table.Row>
+              );
+          }
+      }
     return (
-       <ReactDataGrid
-           onGridSort={this.handleGridSort}
-           columns={columns}
-           rowGetter={rowGetter}
-           rowsCount={user.length}
-           minHeight={500}
-           //toolbar={<Toolbar enableFilter={true}/>}
-           onAddFilter={this.handleFilterChange}
-           onClearFilters={this.onClearFilters}
-       />);
-      // <Card>
-      //   <Card.Content>
-      //     <Card.Header>{user.first_name}{user.last_name}</Card.Header>
-      //     <Card.Meta>{user.courses}</Card.Meta>
-      //     <Card.Description>{user.role}</Card.Description>
-      //   </Card.Content>
-      //   <Card.Content extra>
-      //     <Button fluid basic >Edit</Button>
-      //   </Card.Content>
-      // </Card>
+        <div>
+          <div>
+            <Input type='text' placeholder='Search...' action>
+              <input id="searchqfiltervalue" placeholder={`filter Courses...`} />
+              <Button icon onClick={() => this.setState({ filtertext: document.getElementById('searchqfiltervalue').value,filtertag: "courses" })} > <Icon name='world' /></Button>
+            </Input>
+            <br/><p></p>
+          </div>
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell singleLine>ID</Table.HeaderCell>
+                <Table.HeaderCell>First Name</Table.HeaderCell>
+                <Table.HeaderCell>Last Name</Table.HeaderCell>
+                <Table.HeaderCell>Role</Table.HeaderCell>
+                <Table.HeaderCell>Courses</Table.HeaderCell>
+                <Table.HeaderCell>Section</Table.HeaderCell>
+                <Table.HeaderCell >ProjectID</Table.HeaderCell>
+                <Table.HeaderCell>CommunityPartner</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+          <Table.Body>
+              {listofstudents}</Table.Body>
+          </Table>
+
+        </div>
+
+       );
 
   }
 
   renderStudents() {
     const { users } = this.props;
+    const { projects } = this.props;
 
-
-    console.log(users);
-    console.log( users.length);
-
-	// var listofstudents= []
-     //  for (var i = 0; i < users.length; i++) {
-    //
-     //      var key =users[i];
-     //      listofstudents.push(this.renderStudent(key));
-     //  }
-    return (
+      return (
       <Item.Group>
         <Button onClick={() => this.setState({ modalStudent: true })} fluid content='Add Student' basic icon='add user' />
         <Divider hidden />
 
         <div>
-            {this.renderStudent(users)}
+            {this.renderStudent(users,projects.projects)}
 
 
         </div>
@@ -217,30 +257,58 @@ class Admin extends Component {
   }
 
   renderClasses () {
+
     const { classes } = this.props
-    return (
-      <Item.Group>
-        <Button fluid content='Add Class' basic icon='plus' onClick={() => this.setState({ modal: true })} />
-        {classes.map(item => (
-          <Item key={item.name}>
-             <Item.Content>
-               <Header as='h2'>
-                 {item.name}
-                 <Header.Subheader as='a'>{item.semester}</Header.Subheader>
-               </Header>
-               <Item.Description>{item.description}</Item.Description>
-               <Item.Extra>
-                 <Button size='small' onClick={() => this.setState({ selectedClass: item })} content='Class Details' />
-                 <Button.Group style={{ float: 'right' }} basic size='small'>
-                    <Button content='Remove' icon='trash outline' />
-                    <Button content='Duplicate' icon='clone' />
-                 </Button.Group>
-               </Item.Extra>
-             </Item.Content>
-           </Item>
-         )) }
-      </Item.Group>
-    )
+      const { courses } = this.props;
+      console.log(courses)
+
+
+      var listofcourse= []
+      for (var i = 0; i < courses.length; i++) {
+
+          var key =courses[i];
+
+          if (key[this.state.filtertag].includes(this.state.filtertext)){
+              listofcourse.push(
+                  <Table.Row>
+                    <Table.Cell>
+                        {key.id}
+                    </Table.Cell>
+                    <Table.Cell>{key.department}</Table.Cell>
+                    <Table.Cell>{key.name}</Table.Cell>
+
+                  </Table.Row>
+              );
+          }
+      }
+
+
+    //console.log(this.handleChange(16));
+      return (
+          <Item.Group>
+              <Button fluid content='Add Class' basic icon='plus' onClick={() => this.setState({ modal: true })} />
+              {classes.map(item => (
+                  <Item key={item.name}>
+                      <Item.Content>
+                          <Header as='h2'>
+                              {item.name}
+                              <Header.Subheader as='a'>{item.semester}</Header.Subheader>
+                          </Header>
+                          <Item.Description>{item.description}</Item.Description>
+                          <Item.Extra>
+                              <Button size='small' onClick={() => this.setState({ selectedClass: item })} content='Class Details' />
+                              <Button.Group style={{ float: 'right' }} basic size='small'>
+                                  <Button content='Remove' icon='trash outline' />
+                                  <Button content='Duplicate' icon='clone' />
+                              </Button.Group>
+                          </Item.Extra>
+                      </Item.Content>
+                  </Item>
+              )) }
+              {listofcourse}
+          </Item.Group>
+      )
+
   }
   render () {
     const { activeItem, selectedClass } = this.state
@@ -251,7 +319,10 @@ class Admin extends Component {
           <Menu.Item name='students' active={activeItem === 'student'} onClick={() => this.setState({ activeItem: 'student' })} />
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Input transparent icon={{ name: 'search', link: 'true' }} placeholder={`Search ${activeItem}s...`} />
+              <Input type='text' placeholder='Search...' action>
+                <input id="searchfiltervalue" placeholder={`Search ${activeItem}s...`} />
+                <Button icon onClick={() => this.setState({ filtertext: document.getElementById('searchfiltervalue').value,filtertag: "first_name" })} > <Icon name='world' /></Button>
+              </Input>
             </Menu.Item>
             <Menu.Item style={{ paddingRight: 0 }}>
               <Button >Export CSV</Button>
@@ -358,7 +429,9 @@ class Admin extends Component {
 const mapStateToProps = (state) => {
 	return {
 	  classes: state.class.classes,
-	  users: state.admin.users
+	  users: state.admin.users,
+        projects: state.projects,
+        courses: state.courses.courses,
 	}
 }
 
